@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pip list *)",
+      "Bash(pip install *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8000/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8000/api/admin/stats -u \"admin:changeme123\")",
+      "Bash(taskkill /F /IM python.exe)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8002/)",
+      "WebFetch(domain:engines.com)",
+      "PowerShell(Get-Process python -ErrorAction SilentlyContinue)",
+      "PowerShell(Stop-Process -Force)",
+      "Bash(python -m uvicorn backend.main:app --host 0.0.0.0 --port 8002 --reload)",
+      "WebFetch(domain:www.cars.com)",
+      "WebFetch(domain:www.autotrader.com)",
+      "WebFetch(domain:usengineproduction.com)",
+      "Bash(python -c \"import jinja2; print\\('jinja2', jinja2.__version__, 'OK'\\)\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8002/products)",
+      "Bash(python -c ' *)",
+      "Bash(curl -s -o /dev/null -w \"/ → %{http_code}\\\\n\" http://localhost:8002/)",
+      "Bash(curl -s -o /dev/null -w \"/products → %{http_code}\\\\n\" http://localhost:8002/products)",
+      "Bash(curl -s -o /dev/null -w \"/products?category=engine → %{http_code}\\\\n\" \"http://localhost:8002/products?category=engine\")",
+      "Bash(curl -s -o /dev/null -w \"/products/ls-53-lm7-complete-pullout → %{http_code}\\\\n\" http://localhost:8002/products/ls-53-lm7-complete-pullout)",
+      "Bash(curl -s -o /dev/null -w \"/about → %{http_code}\\\\n\" http://localhost:8002/about)"
+    ]
+  }
+}

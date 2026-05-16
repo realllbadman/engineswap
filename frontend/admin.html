@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EngineSwap Autos &mdash; Admin</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='8' fill='%23111'/><text x='32' y='46' text-anchor='middle' font-size='42' font-family='Arial' font-weight='bold' fill='%23c0392b'>A</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --red:#c0392b;--red-h:#a93226;
+  --dark:#0f0f0f;--dark-2:#181818;--dark-3:#222;
+  --navy:#0d1117;--navy-2:#161b22;--navy-3:#21262d;
+  --white:#fff;--light:#f6f8fa;--light-2:#eef0f3;
+  --border:#d0d7de;--border-2:#e6e8eb;
+  --text:#1f2328;--muted:#636c76;--muted-2:#8b949e;
+  --radius:8px;--radius-md:12px;--radius-lg:16px;
+  --shadow:0 3px 12px rgba(0,0,0,.09);
+  --shadow-lg:0 12px 48px rgba(0,0,0,.18);
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--light);color:var(--text)}
+button{cursor:pointer;font-family:'DM Sans',sans-serif;border:none;outline:none}
+
+/* ── LOGIN ──────────────────────────────────────────────────── */
+#login-screen{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  background:var(--dark);
+  background-image:radial-gradient(ellipse at 30% 50%,rgba(192,57,43,.08) 0%,transparent 60%);
+}
+.login-box{
+  background:var(--white);border-radius:var(--radius-lg);
+  padding:44px 40px;width:100%;max-width:400px;
+  box-shadow:0 24px 64px rgba(0,0,0,.5);
+  border:1px solid var(--border-2);
+}
+.login-logo{
+  font-family:'DM Sans',sans-serif;font-size:26px;font-weight:700;
+  color:var(--dark);margin-bottom:4px;letter-spacing:-.5px;
+}
+.login-logo span{color:var(--red)}
+.login-sub{font-size:13px;color:var(--muted);margin-bottom:32px;font-weight:400}
+.login-group{margin-bottom:18px}
+.login-group label{
+  display:block;font-size:12px;font-weight:700;color:var(--text);
+  margin-bottom:7px;text-transform:uppercase;letter-spacing:.4px;
+}
+.login-group input{
+  width:100%;padding:11px 14px;
+  border:1.5px solid var(--border);border-radius:var(--radius);
+  font-size:14px;font-family:'DM Sans',sans-serif;color:var(--text);
+  transition:.2s;background:var(--white);
+}
+.login-group input:focus{outline:none;border-color:var(--red);box-shadow:0 0 0 3px rgba(192,57,43,.08)}
+.btn-login{
+  width:100%;padding:13px;background:var(--red);color:#fff;
+  border-radius:var(--radius);font-size:15px;font-weight:600;
+  margin-top:6px;transition:.2s;letter-spacing:.2px;
+}
+.btn-login:hover{background:var(--red-h)}
+.login-error{
+  color:var(--red);font-size:13px;margin-top:12px;
+  display:none;text-align:center;
+  background:#fff1f0;border:1px solid #fecaca;
+  border-radius:var(--radius);padding:9px;
+}
+
+/* ── ADMIN SHELL ─────────────────────────────────────────────── */
+#admin-shell{display:none;min-height:100vh;background:var(--light)}
+
+.admin-nav{
+  background:var(--dark);padding:0 24px;height:62px;
+  display:flex;align-items:center;gap:14px;
+  position:sticky;top:0;z-index:100;
+  border-bottom:1px solid #1e1e1e;
+  box-shadow:0 2px 16px rgba(0,0,0,.3);
+}
+.admin-logo{
+  font-family:'DM Sans',sans-serif;font-size:19px;color:#fff;
+  font-weight:700;letter-spacing:-.3px;
+}
+.admin-logo span{color:var(--red)}
+.admin-nav-sub{
+  color:#555;font-size:12px;font-weight:500;
+  background:#1c1c1c;padding:3px 10px;border-radius:20px;
+  border:1px solid #2a2a2a;
+}
+.btn-storetlink{
+  color:#aaa;font-size:12px;
+  padding:5px 12px;border-radius:var(--radius);
+  border:1px solid #2a2a2a;transition:.2s;
+  text-decoration:none;
+}
+.btn-storetlink:hover{color:#fff;border-color:#444}
+.btn-logout{
+  margin-left:auto;background:none;color:#888;font-size:13px;
+  border:1px solid #2a2a2a;padding:6px 14px;border-radius:var(--radius);transition:.2s;
+}
+.btn-logout:hover{border-color:#fff;color:#fff}
+
+.admin-main{max-width:1380px;margin:0 auto;padding:28px 24px}
+
+/* ── STATS ───────────────────────────────────────────────────── */
+.stats-grid{
+  display:grid;grid-template-columns:repeat(5,1fr);
+  gap:14px;margin-bottom:24px;
+}
+.stat-card{
+  background:var(--white);border:1.5px solid var(--border-2);
+  border-radius:var(--radius-lg);padding:22px 20px;
+  transition:.2s;
+}
+.stat-card:hover{box-shadow:var(--shadow);border-color:#bbb}
+.stat-card .num{
+  font-size:34px;font-weight:700;color:var(--dark);
+  line-height:1;margin-bottom:6px;letter-spacing:-.5px;
+}
+.stat-card .lbl{font-size:12px;color:var(--muted);font-weight:500;text-transform:uppercase;letter-spacing:.4px}
+.stat-card.accent{border-top:3px solid var(--red)}
+.stat-card.accent .num{color:var(--red)}
+
+/* ── TABS ────────────────────────────────────────────────────── */
+.tabs{
+  display:flex;background:var(--white);
+  border:1.5px solid var(--border-2);border-radius:var(--radius-lg);
+  overflow:hidden;margin-bottom:18px;
+}
+.tab{
+  flex:1;padding:13px 20px;font-size:14px;font-weight:600;
+  color:var(--muted);background:none;
+  border-right:1px solid var(--border-2);transition:.2s;
+}
+.tab:last-child{border-right:none}
+.tab.active{background:var(--red);color:#fff}
+.tab:hover:not(.active){background:var(--light);color:var(--dark)}
+
+/* ── TABLE PANEL ─────────────────────────────────────────────── */
+.table-panel{
+  background:var(--white);border:1.5px solid var(--border-2);
+  border-radius:var(--radius-lg);overflow:hidden;
+  box-shadow:var(--shadow);
+}
+.panel-header{
+  padding:14px 20px;display:flex;align-items:center;gap:12px;
+  border-bottom:1px solid var(--border-2);background:var(--white);
+}
+.panel-header h3{font-size:15px;font-weight:700;color:var(--dark)}
+.search-box{flex:1;max-width:280px}
+.search-box input{
+  width:100%;padding:7px 12px;
+  border:1.5px solid var(--border);border-radius:var(--radius);
+  font-size:13px;font-family:'DM Sans',sans-serif;color:var(--text);transition:.2s;
+}
+.search-box input:focus{outline:none;border-color:var(--red)}
+.refresh-info{margin-left:auto;font-size:12px;color:var(--muted);white-space:nowrap}
+
+table{width:100%;border-collapse:collapse}
+thead th{
+  text-align:left;padding:10px 16px;
+  font-size:11px;font-weight:700;text-transform:uppercase;
+  letter-spacing:.5px;color:var(--muted);
+  border-bottom:1.5px solid var(--border-2);background:var(--light);
+}
+tbody td{
+  padding:13px 16px;border-bottom:1px solid var(--border-2);
+  font-size:13px;vertical-align:middle;
+}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover td{background:#fafbfc}
+
+.badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.3px}
+.badge-pending{background:#fff3cd;color:#856404}
+.badge-confirmed{background:#cfe2ff;color:#084298}
+.badge-completed{background:#d1e7dd;color:#0a3622}
+.badge-cancelled{background:#f8d7da;color:#842029}
+
+.btn-view{
+  padding:5px 12px;background:var(--dark);color:#fff;
+  border-radius:var(--radius);font-size:12px;font-weight:600;
+  margin-right:6px;transition:.2s;
+}
+.btn-view:hover{background:#333}
+.btn-del{
+  padding:5px 10px;background:#f8d7da;color:#842029;
+  border-radius:var(--radius);font-size:12px;font-weight:600;transition:.2s;
+}
+.btn-del:hover{background:#fecaca}
+.no-data{text-align:center;padding:56px;color:var(--muted);font-size:14px}
+
+/* ── DETAIL MODAL ────────────────────────────────────────────── */
+#detail-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.75);
+  z-index:200;display:none;align-items:center;justify-content:center;padding:16px;
+  backdrop-filter:blur(4px);
+}
+#detail-overlay.show{display:flex}
+#detail-modal{
+  background:var(--white);border-radius:var(--radius-lg);
+  max-width:660px;width:100%;max-height:92vh;overflow-y:auto;
+  box-shadow:0 24px 64px rgba(0,0,0,.35);
+}
+.dmodal-header{
+  background:var(--dark);padding:20px 24px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-radius:var(--radius-lg) var(--radius-lg) 0 0;
+}
+.dmodal-header h3{color:#fff;font-size:17px;font-weight:600}
+.dmodal-close{background:none;color:#aaa;font-size:20px;padding:4px;transition:.2s}
+.dmodal-close:hover{color:#fff}
+.dmodal-body{padding:24px}
+.dmodal-row{display:flex;padding:10px 0;border-bottom:1px solid var(--border-2)}
+.dmodal-row:last-child{border-bottom:none}
+.dmodal-label{
+  width:160px;flex-shrink:0;font-size:11px;color:var(--muted);
+  font-weight:700;text-transform:uppercase;letter-spacing:.4px;padding-top:3px;
+}
+.dmodal-val{font-size:14px;color:var(--dark);font-weight:500;flex:1;line-height:1.6}
+.items-table{width:100%;border-collapse:collapse;margin:8px 0;border-radius:var(--radius);overflow:hidden}
+.items-table th{
+  background:var(--light);padding:7px 10px;text-align:left;
+  font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.3px;color:var(--muted);
+}
+.items-table td{padding:9px 10px;border-bottom:1px solid var(--border-2);font-size:13px}
+.dmodal-actions{
+  padding:18px 24px;border-top:1.5px solid var(--border-2);
+  display:flex;align-items:flex-start;gap:14px;
+  background:var(--light);border-radius:0 0 var(--radius-lg) var(--radius-lg);
+}
+.dmodal-actions label{font-size:12px;font-weight:700;color:var(--dark);text-transform:uppercase;letter-spacing:.3px}
+.dmodal-actions select,.dmodal-actions textarea{
+  padding:8px 11px;border:1.5px solid var(--border);
+  border-radius:var(--radius);font-size:13px;
+  font-family:'DM Sans',sans-serif;background:var(--white);color:var(--text);
+  transition:.2s;
+}
+.dmodal-actions select:focus,.dmodal-actions textarea:focus{outline:none;border-color:var(--red)}
+.dmodal-actions textarea{flex:1;resize:vertical;min-height:64px}
+.btn-save{
+  padding:10px 22px;background:var(--red);color:#fff;
+  border-radius:var(--radius);font-size:13px;font-weight:600;transition:.2s;
+  align-self:flex-end;white-space:nowrap;
+}
+.btn-save:hover{background:var(--red-h)}
+
+@media(max-width:1100px){.stats-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:900px){.stats-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:640px){.stats-grid{grid-template-columns:repeat(2,1fr)}.admin-main{padding:16px}}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">EngineSwap <span>Autos</span></div>
+    <div class="login-sub">Admin Dashboard &mdash; Sign in to continue</div>
+    <form onsubmit="doLogin(event)">
+      <div class="login-group"><label>Username</label><input type="text" id="lu" required autocomplete="username"></div>
+      <div class="login-group"><label>Password</label><input type="password" id="lp" required autocomplete="current-password"></div>
+      <button type="submit" class="btn-login">Sign In</button>
+      <div class="login-error" id="login-error">Invalid username or password</div>
+    </form>
+  </div>
+</div>
+
+<!-- ADMIN SHELL -->
+<div id="admin-shell">
+  <nav class="admin-nav">
+    <span class="admin-logo">EngineSwap <span>Autos</span></span>
+    <span class="admin-nav-sub">Admin Dashboard</span>
+    <a href="/" class="btn-storetlink">← Back to Store</a>
+    <button class="btn-logout" onclick="logout()">Sign Out</button>
+  </nav>
+  <div class="admin-main">
+    <!-- STATS -->
+    <div class="stats-grid" id="stats-grid">
+      <div class="stat-card"><div class="num" id="s-orders">—</div><div class="lbl">Total Orders</div></div>
+      <div class="stat-card accent"><div class="num" id="s-porders">—</div><div class="lbl">Pending Orders</div></div>
+      <div class="stat-card"><div class="num" id="s-month">—</div><div class="lbl">Orders This Month</div></div>
+      <div class="stat-card"><div class="num" id="s-quotes">—</div><div class="lbl">Total Quotes</div></div>
+      <div class="stat-card accent"><div class="num" id="s-pquotes">—</div><div class="lbl">Pending Quotes</div></div>
+    </div>
+
+    <!-- TABS -->
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('orders',this)">Orders</button>
+      <button class="tab" onclick="switchTab('quotes',this)">Quote Requests</button>
+    </div>
+
+    <!-- ORDERS PANEL -->
+    <div class="table-panel" id="panel-orders">
+      <div class="panel-header">
+        <h3>Orders</h3>
+        <div class="search-box"><input type="text" placeholder="Search orders…" oninput="filterTable('orders-table',this.value)"></div>
+        <span class="refresh-info" id="refresh-info-orders">Refreshes in <span id="cd-orders">60</span>s</span>
+      </div>
+      <div style="overflow-x:auto">
+        <table id="orders-table">
+          <thead><tr><th>Date</th><th>Name</th><th>Phone</th><th>Email</th><th>Items</th><th>Total</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody id="orders-body"><tr><td colspan="8" class="no-data">Loading…</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- QUOTES PANEL -->
+    <div class="table-panel" id="panel-quotes" style="display:none">
+      <div class="panel-header">
+        <h3>Quote Requests</h3>
+        <div class="search-box"><input type="text" placeholder="Search quotes…" oninput="filterTable('quotes-table',this.value)"></div>
+        <span class="refresh-info" id="refresh-info-quotes">Refreshes in <span id="cd-quotes">60</span>s</span>
+      </div>
+      <div style="overflow-x:auto">
+        <table id="quotes-table">
+          <thead><tr><th>Date</th><th>Name</th><th>Phone</th><th>Email</th><th>Vehicle Interest</th><th>Details</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody id="quotes-body"><tr><td colspan="8" class="no-data">Loading…</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DETAIL MODAL -->
+<div id="detail-overlay" onclick="closeDetail(event)">
+  <div id="detail-modal">
+    <div class="dmodal-header">
+      <h3 id="dmodal-title">Details</h3>
+      <button class="dmodal-close" onclick="closeDetail()">✕</button>
+    </div>
+    <div class="dmodal-body" id="dmodal-body"></div>
+    <div class="dmodal-actions">
+      <div style="display:flex;flex-direction:column;gap:8px;flex:1">
+        <div style="display:flex;align-items:center;gap:10px">
+          <label>Status</label>
+          <select id="detail-status">
+            <option value="pending">Pending</option>
+            <option value="confirmed">Confirmed</option>
+            <option value="completed">Completed</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <label>Internal Notes</label>
+          <textarea id="detail-notes" placeholder="Add internal notes…" rows="3"></textarea>
+        </div>
+      </div>
+      <button class="btn-save" onclick="saveDetail()">Save Changes</button>
+    </div>
+  </div>
+</div>
+
+<script>
+let authHeader = '';
+let currentTab = 'orders';
+let detailId = null;
+let detailType = null;
+let ordersData = [], quotesData = [];
+let countdown = 60;
+let countdownInterval = null;
+
+// ─── LOGIN ────────────────────────────────────────────────────────────────────
+async function doLogin(e) {
+  e.preventDefault();
+  const u = document.getElementById('lu').value;
+  const p = document.getElementById('lp').value;
+  authHeader = 'Basic ' + btoa(`${u}:${p}`);
+  try {
+    const res = await apiFetch('/api/admin/stats');
+    if (!res.ok) { showLoginError(); return; }
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('admin-shell').style.display = 'block';
+    loadAll();
+    startCountdown();
+  } catch { showLoginError(); }
+}
+
+function showLoginError() {
+  const el = document.getElementById('login-error');
+  el.style.display = 'block';
+  setTimeout(() => el.style.display = 'none', 3000);
+}
+
+function logout() {
+  authHeader = '';
+  clearInterval(countdownInterval);
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('admin-shell').style.display = 'none';
+  document.getElementById('lu').value = '';
+  document.getElementById('lp').value = '';
+}
+
+function apiFetch(url, opts = {}) {
+  return fetch(url, {...opts, headers: {'Content-Type':'application/json', 'Authorization': authHeader, ...(opts.headers||{})}});
+}
+
+// ─── DATA ─────────────────────────────────────────────────────────────────────
+async function loadAll() {
+  await Promise.all([loadStats(), loadOrders(), loadQuotes()]);
+}
+
+async function loadStats() {
+  try {
+    const res = await apiFetch('/api/admin/stats');
+    const d = await res.json();
+    document.getElementById('s-orders').textContent = d.total_orders;
+    document.getElementById('s-porders').textContent = d.pending_orders;
+    document.getElementById('s-month').textContent = d.orders_month;
+    document.getElementById('s-quotes').textContent = d.total_quotes;
+    document.getElementById('s-pquotes').textContent = d.pending_quotes;
+  } catch {}
+}
+
+async function loadOrders() {
+  try {
+    const res = await apiFetch('/api/admin/orders');
+    ordersData = await res.json();
+    renderOrders(ordersData);
+  } catch {}
+}
+
+async function loadQuotes() {
+  try {
+    const res = await apiFetch('/api/admin/bookings');
+    quotesData = await res.json();
+    renderQuotes(quotesData);
+  } catch {}
+}
+
+function fmtDate(iso) {
+  if (!iso) return '—';
+  const d = new Date(iso);
+  return d.toLocaleDateString('en-US', {month:'short',day:'numeric',year:'numeric',hour:'2-digit',minute:'2-digit'});
+}
+
+function badgeHtml(status) {
+  const cls = {'pending':'badge-pending','confirmed':'badge-confirmed','completed':'badge-completed','cancelled':'badge-cancelled'}[status] || 'badge-pending';
+  return `<span class="badge ${cls}">${status}</span>`;
+}
+
+function parseItems(itemsStr) {
+  try { return JSON.parse(itemsStr); } catch { return []; }
+}
+
+function renderOrders(data) {
+  const tbody = document.getElementById('orders-body');
+  if (!data.length) { tbody.innerHTML = `<tr><td colspan="8" class="no-data">No orders yet.</td></tr>`; return; }
+  tbody.innerHTML = data.map(o => {
+    const items = parseItems(o.items);
+    const summary = items.map(i => `${i.name} ×${i.quantity}`).join(', ');
+    return `<tr data-search="${[o.first_name,o.last_name,o.email,o.phone,summary].join(' ').toLowerCase()}">
+      <td>${fmtDate(o.created_at)}</td>
+      <td>${o.first_name} ${o.last_name}</td>
+      <td>${o.phone}</td>
+      <td>${o.email}</td>
+      <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${summary}">${summary}</td>
+      <td><strong>$${o.total.toLocaleString()}</strong></td>
+      <td>${badgeHtml(o.status)}</td>
+      <td>
+        <button class="btn-view" onclick="openDetail('order',${o.id})">View</button>
+        <button class="btn-del" onclick="deleteRecord('order',${o.id})">Delete</button>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+function renderQuotes(data) {
+  const tbody = document.getElementById('quotes-body');
+  if (!data.length) { tbody.innerHTML = `<tr><td colspan="8" class="no-data">No quote requests yet.</td></tr>`; return; }
+  tbody.innerHTML = data.map(q => `
+    <tr data-search="${[q.first_name,q.last_name,q.email,q.phone,q.vehicle_interest||'',q.details||''].join(' ').toLowerCase()}">
+      <td>${fmtDate(q.created_at)}</td>
+      <td>${q.first_name} ${q.last_name}</td>
+      <td>${q.phone}</td>
+      <td>${q.email}</td>
+      <td>${q.vehicle_interest || '—'}</td>
+      <td style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${q.details||''}">${q.details || '—'}</td>
+      <td>${badgeHtml(q.status)}</td>
+      <td>
+        <button class="btn-view" onclick="openDetail('quote',${q.id})">View</button>
+        <button class="btn-del" onclick="deleteRecord('quote',${q.id})">Delete</button>
+      </td>
+    </tr>`).join('');
+}
+
+// ─── DETAIL MODAL ─────────────────────────────────────────────────────────────
+function openDetail(type, id) {
+  detailType = type;
+  detailId = id;
+  const data = type === 'order' ? ordersData.find(o => o.id === id) : quotesData.find(q => q.id === id);
+  if (!data) return;
+
+  document.getElementById('dmodal-title').textContent = type === 'order' ? `Order #${id}` : `Quote #${id}`;
+  document.getElementById('detail-status').value = data.status || 'pending';
+  document.getElementById('detail-notes').value = data.notes || '';
+
+  let bodyHtml = `
+    <div class="dmodal-row"><div class="dmodal-label">Name</div><div class="dmodal-val">${data.first_name} ${data.last_name}</div></div>
+    <div class="dmodal-row"><div class="dmodal-label">Phone</div><div class="dmodal-val">${data.phone}</div></div>
+    <div class="dmodal-row"><div class="dmodal-label">Email</div><div class="dmodal-val">${data.email}</div></div>`;
+
+  if (type === 'order') {
+    const items = parseItems(data.items);
+    bodyHtml += `
+      <div class="dmodal-row"><div class="dmodal-label">Company</div><div class="dmodal-val">${data.company || '—'}</div></div>
+      <div class="dmodal-row"><div class="dmodal-label">Address</div><div class="dmodal-val">${[data.address,data.city,data.state,data.zip,data.country].filter(Boolean).join(', ') || '—'}</div></div>
+      <div class="dmodal-row"><div class="dmodal-label">Freight Region</div><div class="dmodal-val">${data.freight_region || '—'}</div></div>
+      <div class="dmodal-row"><div class="dmodal-label">Contact Pref</div><div class="dmodal-val">${data.contact_pref || '—'} / ${data.best_time || '—'}</div></div>
+      <div class="dmodal-row"><div class="dmodal-label">Payment</div><div class="dmodal-val">${data.payment_method || '—'}</div></div>
+      <div class="dmodal-row"><div class="dmodal-label">Notes</div><div class="dmodal-val">${data.notes || '—'}</div></div>
+      <div class="dmodal-row"><div class="dmodal-label">Items</div><div class="dmodal-val">
+        <table class="items-table">
+          <thead><tr><th>Item</th><th>Year/Fuel</th><th>Qty</th><th>Unit</th><th>Subtotal</th></tr></thead>
+          <tbody>${items.map(i => `<tr><td>${i.name}</td><td>${i.year} / ${i.fuel}</td><td>${i.quantity}</td><td>$${i.unit_price.toLocaleString()}</td><td>$${(i.unit_price*i.quantity).toLocaleString()}</td></tr>`).join('')}</tbody>
+        </table>
+      </div></div>
+      <div class="dmodal-row"><div class="dmodal-label">Total</div><div class="dmodal-val"><strong>$${data.total.toLocaleString()}</strong></div></div>`;
+  } else {
+    bodyHtml += `
+      <div class="dmodal-row"><div class="dmodal-label">Service</div><div class="dmodal-val">${data.service || '—'}</div></div>
+      <div class="dmodal-row"><div class="dmodal-label">Vehicle Interest</div><div class="dmodal-val">${data.vehicle_interest || '—'}</div></div>
+      <div class="dmodal-row"><div class="dmodal-label">Details</div><div class="dmodal-val">${data.details || '—'}</div></div>`;
+  }
+  bodyHtml += `<div class="dmodal-row"><div class="dmodal-label">Date</div><div class="dmodal-val">${fmtDate(data.created_at)}</div></div>`;
+
+  document.getElementById('dmodal-body').innerHTML = bodyHtml;
+  document.getElementById('detail-overlay').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeDetail(e) {
+  if (e && e.target !== document.getElementById('detail-overlay') && !e.target.classList.contains('dmodal-close')) return;
+  document.getElementById('detail-overlay').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+async function saveDetail() {
+  if (!detailId || !detailType) return;
+  const status = document.getElementById('detail-status').value;
+  const notes = document.getElementById('detail-notes').value;
+  const url = detailType === 'order' ? `/api/admin/orders/${detailId}` : `/api/admin/bookings/${detailId}`;
+  try {
+    const res = await apiFetch(url, {method:'PATCH', body: JSON.stringify({status, notes})});
+    if (!res.ok) throw new Error();
+    closeDetail({target:null});
+    loadAll();
+  } catch {
+    alert('Error saving changes. Please try again.');
+  }
+}
+
+async function deleteRecord(type, id) {
+  if (!confirm(`Delete this ${type}? This cannot be undone.`)) return;
+  const url = type === 'order' ? `/api/admin/orders/${id}` : `/api/admin/bookings/${id}`;
+  try {
+    const res = await apiFetch(url, {method:'DELETE'});
+    if (res.status !== 204 && !res.ok) throw new Error();
+    loadAll();
+  } catch {
+    alert('Error deleting record.');
+  }
+}
+
+// ─── TABS & SEARCH ────────────────────────────────────────────────────────────
+function switchTab(tab, el) {
+  currentTab = tab;
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('panel-orders').style.display = tab === 'orders' ? 'block' : 'none';
+  document.getElementById('panel-quotes').style.display = tab === 'quotes' ? 'block' : 'none';
+}
+
+function filterTable(tableId, query) {
+  const q = query.toLowerCase();
+  document.querySelectorAll(`#${tableId} tbody tr`).forEach(row => {
+    const search = row.dataset.search || row.textContent.toLowerCase();
+    row.style.display = search.includes(q) ? '' : 'none';
+  });
+}
+
+// ─── AUTO-REFRESH ─────────────────────────────────────────────────────────────
+function startCountdown() {
+  clearInterval(countdownInterval);
+  countdown = 60;
+  ['cd-orders','cd-quotes'].forEach(id => document.getElementById(id).textContent = countdown);
+  countdownInterval = setInterval(() => {
+    countdown--;
+    ['cd-orders','cd-quotes'].forEach(id => document.getElementById(id).textContent = countdown);
+    if (countdown <= 0) {
+      countdown = 60;
+      loadAll();
+    }
+  }, 1000);
+}
+</script>
+</body>
+</html>

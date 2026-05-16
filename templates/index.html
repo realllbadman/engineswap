@@ -1,0 +1,185 @@
+{% extends "base.html" %}
+
+{% block title %}EngineSwap Autos &mdash; Quality Engines, Classic Cars &amp; Performance Vehicles{% endblock %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-badge">LS Swaps from $2,995 &nbsp;&bull;&nbsp; Classic Cars from $10,995</div>
+      <h1 class="hero-h1">
+        Classic Cars &amp; LS Swap Packages<br>
+        <span class="accent">Ready to Ship Nationwide</span>
+      </h1>
+      <p class="hero-p">
+        Complete LS swap packages, classic muscle cars, and performance engines &mdash;
+        all compression tested, 1-year warranted, and ready to drop in. Financing available.
+      </p>
+      <div class="hero-btns">
+        <a href="/products?category=engine" class="btn-primary">Shop LS Packages</a>
+        <a href="/products?category=sports" class="btn-ghost">View Classic Cars</a>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/c/c1/2014_Rolling_Sculpture_Car_Show_47_%281970_Chevrolet_Chevelle_SS_454_engine%29.jpg"
+        alt="Classic Muscle Car with Engine"
+        class="hero-img"
+        onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/d/d2/1968_Chevrolet_Chevelle_SS.jpg'"
+      >
+      <div class="hero-stat-badge">
+        <div class="hero-stat-num">{{ total_count }}+</div>
+        <div class="hero-stat-lbl">IN STOCK</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="hero-info-boxes">
+      <div class="hero-info-box">
+        <div class="hero-box-content">
+          <div class="hero-box-title">Find Your Engine</div>
+          <div class="hero-box-sub">Search by brand, model, or displacement</div>
+          <a href="/products?category=engine" class="hero-box-link">Search Engines &rarr;</a>
+        </div>
+      </div>
+      <div class="hero-info-box">
+        <div class="hero-box-content">
+          <div class="hero-box-title">Classic &amp; Muscle Cars</div>
+          <div class="hero-box-sub">Chargers, Chevelles, Mustangs and more</div>
+          <a href="/products?category=sports" class="hero-box-link">View Classics &rarr;</a>
+        </div>
+      </div>
+      <div class="hero-info-box">
+        <div class="hero-box-content">
+          <div class="hero-box-title">Call Our Experts</div>
+          <div class="hero-box-sub">Speak with an automotive specialist today</div>
+          <a href="tel:+12105959453" class="hero-box-link">+1 (210) 595-9453</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SHOP BY BRAND -->
+<section class="brands-section">
+  <div class="container">
+    <h2 class="section-title">Shop by Brand</h2>
+    <p class="section-sub">We carry engines and vehicles from all major manufacturers</p>
+    <div class="brand-pills">
+      {% for brand, count in brand_counts %}
+      <a href="/products?q={{ brand | urlencode }}" class="brand-pill">
+        {{ brand }}
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED PRODUCTS -->
+<section class="featured-section">
+  <div class="container">
+    <h2 class="section-title">Featured Products</h2>
+    <p class="section-sub">Quality inventory with 1-year unlimited mileage warranty on every item</p>
+
+    <div class="product-grid">
+      {% for p in products %}
+      <div class="product-card">
+        <div class="card-img-wrap">
+          <img src="{{ p.image }}" alt="{{ p.name }}" loading="lazy"
+               onerror="this.src='https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=400&q=60'">
+          <div class="card-badges">
+            {% if p.in_stock %}
+              <span class="badge-stock">IN STOCK</span>
+            {% else %}
+              <span class="badge-oos">OUT OF STOCK</span>
+            {% endif %}
+            {% if p.badge and ('Deal' in p.badge or 'Hot' in p.badge or 'Seller' in p.badge) %}
+              <span class="badge-hot">{{ p.badge }}</span>
+            {% elif p.badge and ('Rare' in p.badge or 'Collector' in p.badge) %}
+              <span class="badge-rare">{{ p.badge }}</span>
+            {% endif %}
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-brand">{{ p.brand }}</div>
+          <h3 class="card-name"><a href="/products/{{ p.slug }}">{{ p.name }}</a></h3>
+          <div class="card-sku">{{ p.year }} &bull; {{ p.fuel }} &bull; {{ p.transmission }}</div>
+          <div class="card-warranty">1 Year Unlimited Mileage Warranty</div>
+          <div class="card-price">
+            ${{ "{:,.0f}".format(p.price) }}
+            {% if p.original_price and p.original_price > p.price %}
+              <span class="card-orig">${{ "{:,.0f}".format(p.original_price) }}</span>
+            {% endif %}
+          </div>
+          <div style="font-size:11.5px;color:#e87722;font-weight:700;margin-bottom:10px">
+            20% Down: ${{ "{:,.0f}".format(p.price * 0.20) }} &bull; Finance 6&ndash;12 months
+          </div>
+          <div class="card-btn-row">
+            <button class="btn-cart-sm"
+              {% if not p.in_stock %}disabled{% endif %}
+              data-slug="{{ p.slug }}"
+              data-name="{{ p.name }}"
+              data-price="{{ p.price }}"
+              data-image="{{ p.image }}"
+              data-year="{{ p.year }}"
+              data-fuel="{{ p.fuel }}">
+              Add to Cart
+            </button>
+            <a href="/products/{{ p.slug }}" class="btn-details-sm">Details</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="view-all-wrap">
+      <a href="/products" class="btn-view-all">View All Products &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section class="why-section">
+  <div class="container">
+    <h2 class="section-title">Why Choose EngineSwap Autos?</h2>
+    <p class="section-sub">Over 15 years of experience in quality engine and vehicle sales</p>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-title">LS Swaps from $2,995</div>
+        <div class="why-desc">Budget to premium LS packages. ECU &amp; harness included. Compression tested and dropout ready.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-title">Compression Tested</div>
+        <div class="why-desc">Every engine compression and leak-down tested before it ships. No surprises on delivery.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-title">Ships Nationwide</div>
+        <div class="why-desc">Free shipping on orders over $500. Freight &amp; international shipping available on all items.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-title">Financing Available</div>
+        <div class="why-desc">Flexible payment options on classic cars and high-value engines. Call us to get started today.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA STRIP -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <div class="cta-left">
+      <h2>Ready to Find Your Engine or Vehicle?</h2>
+      <p>Call our experts today or browse our complete inventory online.</p>
+    </div>
+    <div class="cta-btns">
+      <a href="tel:+12105959453" class="btn-cta-primary">+1 (210) 595-9453</a>
+      <a href="/products" class="btn-cta-outline">Browse Products</a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

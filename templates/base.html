@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}EngineSwap Autos — Quality Engines & Classic Cars{% endblock %}</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='6' fill='%231a2c4e'/><text x='32' y='46' text-anchor='middle' font-size='28' font-family='Georgia' font-weight='bold' fill='%23e87722'>ESA</text></svg>">
+  <link rel="stylesheet" href="/static/css/main.css">
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+<!-- BAR 1: TOP STRIP -->
+<div class="top-strip">
+  <div class="top-strip-inner">
+    <div class="top-strip-left">CALL OR TEXT: <strong>+1 (210) 595-9453</strong></div>
+    <div class="top-strip-center">
+      <span>Mon&ndash;Sat 8am&ndash;7pm EST</span>
+      <span>|</span>
+      <span>Free Shipping on Orders $5,000+</span>
+    </div>
+    <div class="top-strip-right">
+      <a href="mailto:Engineswapsupplies@gmail.com">Engineswapsupplies@gmail.com</a>
+    </div>
+  </div>
+</div>
+
+<!-- BAR 2: MAIN NAV -->
+<nav class="main-nav">
+  <div class="main-nav-inner">
+    <a href="/" class="logo-wrap">
+      <div class="logo-text">
+        <span class="logo-engine">ENGINE</span><span class="logo-swap">SWAP</span>&nbsp;<span class="logo-autos">AUTOS</span>
+      </div>
+      <div class="logo-sub">Engines &middot; Classic Cars &middot; Performance</div>
+    </a>
+
+    <form class="nav-search-form" id="nav-search-form" action="/products" method="get">
+      <input type="text" name="q" id="nav-search-input" class="nav-search-input"
+             placeholder="Search engines, classic cars, parts&hellip;"
+             value="{{ request.query_params.get('q', '') }}">
+      <button type="submit" class="nav-search-btn">SEARCH</button>
+    </form>
+
+    <div class="nav-right">
+      <div class="nav-phone-block">
+        <div class="nav-phone-label">CALL OR TEXT US</div>
+        <a href="tel:+12105959453" class="nav-phone-num">+1 (210) 595-9453</a>
+      </div>
+      <button type="button" class="btn-quote" onclick="openQuoteModal()">GET A QUOTE</button>
+      <button type="button" class="btn-cart" id="nav-cart-btn" title="View cart">
+        Cart <span class="cart-count-badge" id="cart-badge"></span>
+      </button>
+    </div>
+
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div class="mobile-menu-panel" id="mobile-menu-panel">
+    <a href="/">Home</a>
+    <a href="/products">All Products</a>
+    <a href="/products?category=engine">Engines</a>
+    <a href="/products?category=sedan">Classic Cars</a>
+    <a href="/products?category=sports">Sports / Muscle</a>
+    <a href="/products?category=transmission">Transmissions</a>
+    <a href="/products?category=truck">Trucks</a>
+    <a href="/about">About Us</a>
+    <a href="tel:+12105959453">+1 (210) 595-9453</a>
+  </div>
+</nav>
+
+<!-- BAR 3: TRUST STRIP -->
+<div class="trust-strip">
+  <div class="trust-inner">
+    <span class="trust-item">Free Shipping $5,000+</span>
+    <span class="trust-item">1-Year Unlimited Warranty</span>
+    <span class="trust-item">500+ Engines &amp; Vehicles</span>
+    <span class="trust-item">Expert Support 24/7</span>
+    <span class="trust-item">Worldwide Shipping</span>
+  </div>
+</div>
+
+<!-- BAR 4: CATEGORY NAV -->
+<nav class="cat-nav">
+  <div class="cat-nav-inner">
+    <a href="/products"                 class="cat-nav-link">ALL PRODUCTS</a>
+    <a href="/products?category=engine" class="cat-nav-link">ENGINES</a>
+    <a href="/products?category=sedan"  class="cat-nav-link">CLASSIC CARS</a>
+    <a href="/products?category=suv"    class="cat-nav-link">SUV / TRUCK</a>
+    <a href="/products?category=truck"  class="cat-nav-link">TRUCKS</a>
+    <a href="/products?category=sports"       class="cat-nav-link">SPORTS / MUSCLE</a>
+    <a href="/products?category=transmission" class="cat-nav-link">TRANSMISSIONS</a>
+    <a href="/about"                          class="cat-nav-link">ABOUT US</a>
+  </div>
+</nav>
+
+<!-- PAGE CONTENT -->
+{% block content %}{% endblock %}
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <span class="footer-logo">
+        <span style="color:#fff">ENGINESWAP</span>&nbsp;<span style="color:#e87722">AUTOS</span>
+      </span>
+      <p class="footer-tagline">Your trusted source for quality remanufactured engines, classic muscle cars, and performance vehicles. Based in San Antonio, Texas.</p>
+      <div class="footer-contact">
+        <div>Tel: <a href="tel:+12105959453" style="color:rgba(255,255,255,.7)">+1 (210) 595-9453</a></div>
+        <div>Email: Engineswapsupplies@gmail.com</div>
+        <div>San Antonio, Texas</div>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Products</h4>
+      <a href="/products?category=engine">Engines</a>
+      <a href="/products?category=sedan">Classic Cars</a>
+      <a href="/products?category=suv">SUV / Truck</a>
+      <a href="/products?category=truck">Trucks</a>
+      <a href="/products?category=sports">Sports / Muscle</a>
+    <a href="/products?category=transmission">Transmissions</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="/about">About Us</a>
+      <a href="#">Warranty Info</a>
+      <a href="#">Store Policies</a>
+      <a href="#">Terms &amp; Conditions</a>
+      <a href="#">Privacy Policy</a>
+    </div>
+    <div class="footer-col">
+      <h4>Support</h4>
+      <a href="#">FAQ</a>
+      <a href="/products">Browse Inventory</a>
+      <a href="tel:+12105959453">Contact Us</a>
+      <div class="footer-hours">Mon&ndash;Fri: 8am&ndash;6pm EST<br>Sat: 9am&ndash;4pm EST<br>Sun: Closed</div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    &copy; 2019 EngineSwap Autos. All Rights Reserved. &nbsp;|&nbsp; Prices subject to change. All sales final.
+  </div>
+</footer>
+
+<!-- TOAST -->
+<div class="toast-msg" id="site-toast"></div>
+
+<!-- CART OVERLAY -->
+<div class="cart-overlay-bg" id="cart-overlay-bg" onclick="closeCart()"></div>
+
+<!-- CART DRAWER -->
+<div class="cart-drawer" id="cart-drawer">
+  <div class="cart-drawer-head">
+    <h3>Your Cart</h3>
+    <button class="cart-close-btn" onclick="closeCart()">&times;</button>
+  </div>
+  <div class="cart-drawer-items" id="cart-drawer-items">
+    <div class="cart-empty-msg" id="cart-empty-msg">
+      Your cart is empty.<br>Browse our inventory to add items.
+    </div>
+  </div>
+  <div class="cart-drawer-foot" id="cart-drawer-foot" style="display:none">
+    <div class="cart-summary-row"><span>Subtotal</span><span id="cart-subtotal">$0</span></div>
+    <div class="cart-summary-row"><span>Shipping</span><span id="cart-shipping">Calculated at checkout</span></div>
+    <div class="cart-ship-note" id="cart-ship-note"></div>
+    <div class="cart-total-row"><span>Estimated Total</span><span id="cart-total">$0</span></div>
+    <a href="/checkout" class="btn-place-order" id="checkout-link">Proceed to Checkout &rarr;</a>
+    <button class="btn-continue-shopping" onclick="closeCart()">Continue Shopping</button>
+  </div>
+</div>
+
+<!-- QUOTE MODAL -->
+<div class="order-modal" id="quote-modal" onclick="handleModalClick(event,'quote-modal')">
+  <div class="order-modal-inner" style="max-width:540px">
+    <div class="omodal-head">
+      <h3>Request a Quote</h3>
+      <button class="omodal-close" onclick="closeQuoteModal()">&times;</button>
+    </div>
+    <div class="omodal-body">
+      <form id="quote-form" onsubmit="submitQuote(event)">
+        <div class="ofield-group">
+          <div class="ofield"><label>First Name</label><input type="text" name="first_name" required placeholder="John"></div>
+          <div class="ofield"><label>Last Name</label><input type="text" name="last_name" required placeholder="Smith"></div>
+        </div>
+        <div class="ofield-group">
+          <div class="ofield"><label>Phone</label><input type="tel" name="phone" required placeholder="+1 (555) 000-0000"></div>
+          <div class="ofield"><label>Email</label><input type="email" name="email" required placeholder="john@email.com"></div>
+        </div>
+        <div class="ofield-group full">
+          <div class="ofield"><label>Vehicle / Engine Interest <span class="opt">(optional)</span></label>
+            <input type="text" name="vehicle_interest" placeholder="e.g. GM LS3 6.2L, 1969 Dodge Charger"></div>
+        </div>
+        <div class="ofield-group">
+          <div class="ofield"><label>Quantity</label>
+            <select name="quantity"><option>1</option><option>2</option><option>3</option><option>4</option><option>5+</option></select>
+          </div>
+          <div class="ofield"><label>Timeline</label>
+            <select name="timeline">
+              <option>As soon as possible</option><option>Within 1 week</option>
+              <option>Within 1 month</option><option>Just researching</option>
+            </select>
+          </div>
+        </div>
+        <div class="ofield-group full">
+          <div class="ofield"><label>Message <span class="opt">(optional)</span></label>
+            <textarea name="details" rows="3" placeholder="Tell us what you are looking for&hellip;"></textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn-submit-order">Submit Quote Request</button>
+      </form>
+      <div class="order-success-msg" id="quote-success-msg">
+        <h3>Quote Request Sent</h3>
+        <p>We will get back to you within 24 hours. Check your email for confirmation.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/static/js/main.js"></script>
+{% block extra_scripts %}{% endblock %}
+
+<!-- Smartsupp Live Chat script -->
+<script type="text/javascript">
+var _smartsupp = _smartsupp || {};
+_smartsupp.key = '65b4ec93525cb11af427c2b74f8e6901df83e1fb';
+window.smartsupp||(function(d) {
+	var s,c,o=smartsupp=function(){ o._.push(arguments)};o._=[];
+	s=d.getElementsByTagName('script')[0];c=d.createElement('script');
+	c.type='text/javascript';c.charset='utf-8';c.async=true;
+	c.src='https://www.smartsuppchat.com/loader.js?';s.parentNode.insertBefore(c,s);
+})(document);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+
+{% block title %}{{ product.name }} &mdash; EngineSwap Autos{% endblock %}
+
+{% block content %}
+<div class="product-detail-page">
+  <div class="container">
+
+    <div class="breadcrumb" style="margin-bottom:24px">
+      <a href="/">Home</a> &rsaquo;
+      <a href="/products">Products</a> &rsaquo;
+      <a href="/products?category={{ product.category }}">{{ product.category | capitalize }}</a> &rsaquo;
+      {{ product.name }}
+    </div>
+
+    <div class="detail-grid">
+
+      <!-- Image -->
+      <div>
+        <div class="detail-img-wrap">
+          <img src="{{ product.image }}" alt="{{ product.name }}" class="detail-img"
+               onerror="this.src='https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=800&q=60'">
+        </div>
+      </div>
+
+      <!-- Info -->
+      <div class="detail-info">
+        <div class="detail-category">{{ product.brand }} &bull; {{ product.category | upper }}</div>
+        <h1 class="detail-name">{{ product.name }}</h1>
+
+        <div class="detail-price-row">
+          <span class="detail-price">${{ "{:,.0f}".format(product.price) }}</span>
+          {% if product.original_price and product.original_price > product.price %}
+            <span class="detail-orig">${{ "{:,.0f}".format(product.original_price) }}</span>
+          {% endif %}
+        </div>
+        {% if product.original_price and product.original_price > product.price %}
+          <div class="detail-save">You save ${{ "{:,.0f}".format(product.original_price - product.price) }}</div>
+        {% endif %}
+
+        <!-- Down payment + financing -->
+        <div style="background:#fff8f2;border:1.5px solid #e87722;border-radius:6px;padding:12px 16px;margin-bottom:16px">
+          <div style="font-size:14px;font-weight:800;color:#e87722;margin-bottom:4px">
+            20% Down Payment: ${{ "{:,.0f}".format(product.price * 0.20) }}
+          </div>
+          <div style="font-size:13px;color:#555">
+            Financing available &bull; 6&ndash;12 month terms &bull; Call us to apply: +1 (210) 595-9453
+          </div>
+        </div>
+        <!-- Shipping info -->
+        <div style="background:#f0f4f8;border:1px solid #d0d7de;border-radius:6px;padding:10px 16px;margin-bottom:16px;font-size:12.5px;color:#555">
+          {% if product.category == 'engine' or product.category == 'transmission' %}
+            Shipping: <strong style="color:#1a2c4e">$500 flat rate</strong> &bull; Free on orders $5,000+
+          {% else %}
+            Shipping: <strong style="color:#1a2c4e">$1,000 flat rate</strong> &bull; Free on orders $5,000+
+          {% endif %}
+        </div>
+        <div class="detail-warranty-bar">
+          1-Year Unlimited Mileage Warranty Included
+        </div>
+
+        <div class="detail-specs">
+          <div class="spec-row"><span class="spec-label">Year</span><span class="spec-val">{{ product.year }}</span></div>
+          <div class="spec-row"><span class="spec-label">Fuel Type</span><span class="spec-val">{{ product.fuel }}</span></div>
+          <div class="spec-row"><span class="spec-label">Transmission</span><span class="spec-val">{{ product.transmission }}</span></div>
+          <div class="spec-row">
+            <span class="spec-label">Mileage</span>
+            <span class="spec-val">
+              {% if product.mileage and product.mileage > 0 %}{{ "{:,}".format(product.mileage) }} mi{% else %}New / 0 mi{% endif %}
+            </span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">Availability</span>
+            <span class="spec-val" style="color:{% if product.in_stock %}#28a745{% else %}#dc3545{% endif %};font-weight:700">
+              {% if product.in_stock %}In Stock &mdash; Ready to Ship{% else %}Out of Stock{% endif %}
+            </span>
+          </div>
+          {% if product.badge %}
+          <div class="spec-row"><span class="spec-label">Status</span><span class="spec-val">{{ product.badge }}</span></div>
+          {% endif %}
+        </div>
+
+        {% if product.description %}
+        <p class="detail-desc">{{ product.description }}</p>
+        {% endif %}
+
+        {% if features %}
+        <div class="detail-features">
+          <h4>Key Features</h4>
+          {% for feat in features %}
+          <div class="feature-item">
+             {{ feat }}
+          </div>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        <button class="btn-add-cart btn-cart-sm"
+                data-slug="{{ product.slug }}"
+                data-name="{{ product.name }}"
+                data-price="{{ product.price }}"
+                data-image="{{ product.image }}"
+                data-year="{{ product.year }}"
+                data-fuel="{{ product.fuel }}"
+                {% if not product.in_stock %}disabled{% endif %}>
+          Add to Cart
+        </button>
+        <a href="tel:+12105959453" class="btn-get-quote-det" style="display:block;text-align:center;text-decoration:none;margin-top:10px">
+          Call to Order: +1 (210) 595-9453
+        </a>
+
+        <div style="display:flex;gap:20px;flex-wrap:wrap;margin-top:20px;padding-top:18px;border-top:1px solid #e0e0e0">
+          <span style="font-size:12px;color:#555">Free Shipping $500+</span>
+          <span style="font-size:12px;color:#555">1-Year Warranty</span>
+          <span style="font-size:12px;color:#555">Expert Support</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% if related %}
+<section class="related-section">
+  <div class="related-inner">
+    <h2 class="related-title">More {{ product.category | capitalize }} Products</h2>
+    <div class="product-grid">
+      {% for rp in related %}
+      <div class="product-card">
+        <div class="card-img-wrap">
+          <img src="{{ rp.image }}" alt="{{ rp.name }}" loading="lazy"
+               onerror="this.src='https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=400&q=60'">
+          <div class="card-badges">
+            {% if rp.in_stock %}<span class="badge-stock">IN STOCK</span>
+            {% else %}<span class="badge-oos">OUT OF STOCK</span>{% endif %}
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-brand">{{ rp.brand }}</div>
+          <h3 class="card-name"><a href="/products/{{ rp.slug }}">{{ rp.name }}</a></h3>
+          <div class="card-sku">{{ rp.year }} &bull; {{ rp.fuel }}</div>
+          <div class="card-warranty">1 Year Unlimited Mileage Warranty</div>
+          <div class="card-price">
+            ${{ "{:,.0f}".format(rp.price) }}
+            {% if rp.original_price and rp.original_price > rp.price %}
+              <span class="card-orig">${{ "{:,.0f}".format(rp.original_price) }}</span>
+            {% endif %}
+          </div>
+          <div class="card-btn-row">
+            <button class="btn-cart-sm" {% if not rp.in_stock %}disabled{% endif %}
+              data-slug="{{ rp.slug }}" data-name="{{ rp.name }}" data-price="{{ rp.price }}"
+              data-image="{{ rp.image }}" data-year="{{ rp.year }}" data-fuel="{{ rp.fuel }}">
+              Add to Cart
+            </button>
+            <a href="/products/{{ rp.slug }}" class="btn-details-sm">Details</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% endblock %}

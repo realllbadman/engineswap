@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block title %}
+  {% if category %}{{ category | capitalize }} &mdash; EngineSwap Autos
+  {% else %}All Products &mdash; EngineSwap Autos{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="products-page">
+  <div class="container">
+
+    <div class="breadcrumb">
+      <a href="/">Home</a> &rsaquo;
+      {% if category %}<a href="/products">All Products</a> &rsaquo; {{ category | capitalize }}
+      {% else %}All Products{% endif %}
+    </div>
+
+    <h1 class="page-h1">
+      {% if category == 'engine' %}Engines
+      {% elif category == 'sedan' %}Classic Cars
+      {% elif category == 'suv' %}SUV &amp; Trucks
+      {% elif category == 'truck' %}Trucks
+      {% elif category == 'sports' %}Sports &amp; Muscle Cars
+      {% else %}All Products{% endif %}
+    </h1>
+    <p class="result-info" id="result-count" style="display:none"></p>
+
+    <div class="filter-row">
+      <input type="text" id="filter-search" class="filter-search"
+             placeholder="Search by name or brand&hellip;" value="{{ q }}">
+      <select id="filter-category" class="filter-select">
+        <option value="">All Categories</option>
+        <option value="engine" {% if category == 'engine' %}selected{% endif %}>Engines</option>
+        <option value="sedan"  {% if category == 'sedan'  %}selected{% endif %}>Classic Cars</option>
+        <option value="suv"    {% if category == 'suv'    %}selected{% endif %}>SUV</option>
+        <option value="truck"  {% if category == 'truck'  %}selected{% endif %}>Trucks</option>
+        <option value="sports" {% if category == 'sports' %}selected{% endif %}>Sports / Muscle</option>
+      </select>
+    </div>
+
+    <div class="product-grid" id="product-grid">
+      {% for p in products %}
+      <div class="product-card"
+           data-name="{{ p.name | lower }}"
+           data-brand="{{ p.brand | lower }}"
+           data-category="{{ p.category }}">
+
+        <div class="card-img-wrap">
+          <img src="{{ p.image }}" alt="{{ p.name }}" loading="lazy"
+               onerror="this.src='https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=400&q=60'">
+          <div class="card-badges">
+            {% if p.in_stock %}
+              <span class="badge-stock">IN STOCK</span>
+            {% else %}
+              <span class="badge-oos">OUT OF STOCK</span>
+            {% endif %}
+            {% if p.badge %}
+              {% if 'Deal' in p.badge or 'Hot' in p.badge or 'Seller' in p.badge %}
+                <span class="badge-hot">{{ p.badge }}</span>
+              {% elif 'Rare' in p.badge or 'Collector' in p.badge %}
+                <span class="badge-rare">{{ p.badge }}</span>
+              {% endif %}
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="card-body">
+          <div class="card-brand">{{ p.brand }}</div>
+          <h3 class="card-name"><a href="/products/{{ p.slug }}">{{ p.name }}</a></h3>
+          <div class="card-sku">
+            {{ p.year }}
+            {% if p.fuel %}&bull; {{ p.fuel }}{% endif %}
+            {% if p.transmission and p.transmission != 'N/A' %}&bull; {{ p.transmission }}{% endif %}
+            {% if p.mileage > 0 %}&bull; {{ "{:,}".format(p.mileage) }} mi{% endif %}
+          </div>
+          <div class="card-warranty">1 Year Unlimited Mileage Warranty</div>
+          <div class="card-price">
+            ${{ "{:,.0f}".format(p.price) }}
+            {% if p.original_price and p.original_price > p.price %}
+              <span class="card-orig">${{ "{:,.0f}".format(p.original_price) }}</span>
+            {% endif %}
+          </div>
+          <div style="font-size:11.5px;color:#e87722;font-weight:700;margin-bottom:10px">
+            20% Down: ${{ "{:,.0f}".format(p.price * 0.20) }} &bull; Finance 6&ndash;12 months
+          </div>
+          <div class="card-btn-row">
+            <button class="btn-cart-sm"
+              {% if not p.in_stock %}disabled{% endif %}
+              data-slug="{{ p.slug }}"
+              data-name="{{ p.name }}"
+              data-price="{{ p.price }}"
+              data-image="{{ p.image }}"
+              data-year="{{ p.year }}"
+              data-fuel="{{ p.fuel }}">
+              Add to Cart
+            </button>
+            <a href="/products/{{ p.slug }}" class="btn-details-sm">Details</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+
+      {% if not products %}
+      <div style="grid-column:1/-1;text-align:center;padding:60px 20px;color:#888">
+        <h3 style="font-size:22px;margin-bottom:8px">No products found</h3>
+        <p>Try adjusting your search or <a href="/products" style="color:#e87722">view all products</a>.</p>
+      </div>
+      {% endif %}
+    </div>
+
+  </div>
+</div>
+{% endblock %}

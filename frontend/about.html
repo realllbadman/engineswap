@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>About Us &mdash; EngineSwap Autos</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='6' fill='%231a2c4e'/><text x='32' y='46' text-anchor='middle' font-size='28' font-family='Georgia' font-weight='bold' fill='%23e87722'>ESA</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#1a2c4e; --navy-dark:#111f38; --navy2:#243b55;
+  --orange:#e87722; --orange-h:#cf6510;
+  --gray-bg:#f5f5f5; --gray-mid:#e0e0e0; --gray-light:#f0f4f8;
+  --text:#1a1a1a; --mid:#555; --light-text:#888;
+  --green:#28a745;
+  --white:#fff;
+  --rad:6px; --rad-md:10px;
+  --sh:0 2px 12px rgba(0,0,0,.08);
+  --sh-md:0 4px 24px rgba(0,0,0,.12);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Segoe UI',system-ui,sans-serif;color:var(--text);background:var(--white);overflow-x:hidden}
+h1,h2,h3{font-family:Georgia,serif}
+a{text-decoration:none;color:inherit}
+button{cursor:pointer;border:none;font-family:inherit}
+img{display:block;max-width:100%;object-fit:cover}
+
+/* TOP STRIP */
+.top-strip{background:var(--navy-dark);height:34px;display:flex;align-items:center;padding:0 20px}
+.ts-inner{max-width:1200px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between}
+.ts-left{font-size:12px;color:rgba(255,255,255,.8)}
+.ts-left strong{color:#fff}
+.ts-right{font-size:12px;color:rgba(255,255,255,.6);display:flex;gap:14px;align-items:center}
+.ts-right a{color:rgba(255,255,255,.6);transition:.2s}
+.ts-right a:hover{color:var(--orange)}
+
+/* MAIN NAV */
+.main-nav{background:var(--white);border-bottom:1px solid var(--gray-mid);padding:14px 0;box-shadow:var(--sh)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:16px}
+.logo-wrap{text-decoration:none}
+.logo-text{font-family:Georgia,serif;font-size:22px;font-weight:700;letter-spacing:.5px;line-height:1}
+.logo-engine,.logo-swap{color:var(--navy)}
+.logo-autos{color:var(--orange)}
+.logo-sub{font-size:9px;color:var(--light-text);letter-spacing:3px;text-transform:uppercase;margin-top:4px;font-family:'Segoe UI',sans-serif}
+.nav-links{display:flex;align-items:center;gap:8px;margin-left:auto}
+.nav-link{font-size:13px;font-weight:600;color:var(--mid);padding:7px 12px;border-radius:var(--rad);transition:.2s}
+.nav-link:hover{color:var(--text);background:var(--gray-bg)}
+.nav-link.active{color:var(--navy)}
+.btn-back{background:var(--gray-bg);color:var(--navy);padding:8px 16px;border-radius:var(--rad);font-size:13px;font-weight:600;border:1px solid var(--gray-mid);transition:.2s}
+.btn-back:hover{border-color:var(--navy);background:var(--white)}
+.btn-quote{background:var(--orange);color:var(--white);padding:8px 18px;border-radius:var(--rad);font-size:13px;font-weight:700;transition:.2s}
+.btn-quote:hover{background:var(--orange-h)}
+
+/* TRUST STRIP */
+.trust-strip{background:var(--gray-light);border-bottom:1px solid var(--gray-mid);padding:8px 0}
+.trust-inner{max-width:1200px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-around;align-items:center;flex-wrap:wrap;gap:6px}
+.trust-item{font-size:12px;color:var(--navy);font-weight:600;display:flex;align-items:center;gap:5px}
+.trust-item .ck{color:var(--green);font-weight:700}
+
+/* HERO */
+.about-hero{background:linear-gradient(135deg,#111f38 0%,#1e3a5f 100%);padding:80px 20px 64px;text-align:center;position:relative;overflow:hidden}
+.about-hero::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=1800&q=30') center/cover no-repeat;opacity:.06}
+.hero-inner{position:relative;z-index:1;max-width:700px;margin:0 auto}
+.eyebrow{display:inline-block;background:rgba(232,119,34,.15);border:1px solid var(--orange);color:var(--orange);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;padding:5px 16px;border-radius:30px;margin-bottom:20px}
+.about-hero h1{font-size:clamp(32px,4.5vw,52px);color:#fff;line-height:1.1;margin-bottom:14px}
+.about-hero h1 em{color:var(--orange);font-style:italic}
+.about-hero p{color:rgba(255,255,255,.75);font-size:16px;line-height:1.75}
+
+/* STATS */
+.stats-strip{background:var(--white);border-bottom:1px solid var(--gray-mid)}
+.stats-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
+.stat-item{text-align:center;padding:28px 16px;border-right:1px solid var(--gray-mid)}
+.stat-item:last-child{border-right:none}
+.stat-num{font-family:Georgia,serif;font-size:34px;font-weight:700;color:var(--orange);display:block;line-height:1;margin-bottom:6px}
+.stat-label{font-size:12.5px;color:var(--mid);font-weight:500}
+
+/* MAIN CONTENT */
+.about-body{max-width:1200px;margin:0 auto;padding:64px 20px}
+.sec-eyebrow{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--orange);display:block;margin-bottom:10px}
+.about-body h2{font-size:32px;color:var(--navy);margin-bottom:14px;line-height:1.15}
+.about-body p{font-size:15px;color:var(--mid);line-height:1.85;margin-bottom:16px}
+
+/* Story grid */
+.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;margin-bottom:72px}
+.story-img-wrap{border-radius:var(--rad-md);overflow:hidden;height:400px;position:relative;box-shadow:var(--sh-md)}
+.story-img-wrap img{width:100%;height:100%}
+.story-badge{position:absolute;bottom:20px;left:20px;background:var(--navy-dark);color:#fff;padding:12px 18px;border-radius:var(--rad);border-left:4px solid var(--orange)}
+.story-badge strong{display:block;font-size:18px;font-weight:700;font-family:Georgia,serif}
+.story-badge span{font-size:12px;color:rgba(255,255,255,.65)}
+
+/* Values */
+.values-section{margin-bottom:72px}
+.values-section h2{text-align:center;margin-bottom:8px}
+.values-sub{text-align:center;font-size:15px;color:var(--mid);margin-bottom:40px}
+.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.value-card{background:var(--white);border:1.5px solid var(--gray-mid);border-radius:var(--rad-md);padding:28px 22px;transition:.2s;border-top:3px solid transparent}
+.value-card:hover{box-shadow:var(--sh-md);border-top-color:var(--orange);transform:translateY(-2px)}
+.value-card h3{font-size:16px;font-weight:700;color:var(--navy);margin-bottom:10px;font-family:'Segoe UI',sans-serif}
+.value-card p{font-size:13px;color:var(--mid);line-height:1.7;margin:0}
+
+/* Differentiators dark panel */
+.diff-section{background:var(--navy-dark);border-radius:var(--rad-md);padding:48px;margin-bottom:72px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.diff-text h2{font-size:30px;color:#fff;margin-bottom:12px}
+.diff-text p{font-size:14px;color:rgba(255,255,255,.65);line-height:1.8;margin-bottom:16px}
+.diff-list{list-style:none;display:flex;flex-direction:column;gap:10px;margin-top:20px}
+.diff-list li{font-size:13.5px;color:rgba(255,255,255,.8);display:flex;align-items:flex-start;gap:10px;line-height:1.5}
+.diff-list li::before{content:'&#10003;';color:var(--orange);font-weight:700;flex-shrink:0;margin-top:1px}
+.diff-img{border-radius:var(--rad-md);overflow:hidden;height:340px}
+.diff-img img{width:100%;height:100%;opacity:.85}
+
+/* Contact */
+.contact-section h2{margin-bottom:6px}
+.contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px}
+.contact-card{background:var(--gray-bg);border:1.5px solid var(--gray-mid);border-radius:var(--rad-md);padding:26px 22px;text-align:center;transition:.2s}
+.contact-card:hover{border-color:var(--orange);background:#fff8f2}
+.contact-card h3{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:8px;font-family:'Segoe UI',sans-serif}
+.contact-card a,.contact-card p{font-size:13px;color:var(--mid);line-height:1.6;display:block;margin:0}
+.contact-card a:hover{color:var(--orange)}
+
+/* CTA */
+.about-cta{background:var(--navy);padding:72px 20px;text-align:center}
+.cta-inner{max-width:600px;margin:0 auto}
+.about-cta h2{font-size:34px;color:#fff;margin-bottom:12px}
+.about-cta p{color:rgba(255,255,255,.7);font-size:15px;margin-bottom:28px;line-height:1.7}
+.cta-buttons{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+.btn-browse{display:inline-block;padding:14px 34px;background:var(--orange);color:#fff;border-radius:var(--rad);font-size:15px;font-weight:700;transition:.2s}
+.btn-browse:hover{background:var(--orange-h)}
+.btn-ghost{display:inline-block;padding:14px 30px;background:transparent;color:#fff;border:2px solid rgba(255,255,255,.3);border-radius:var(--rad);font-size:15px;font-weight:600;transition:.2s}
+.btn-ghost:hover{border-color:rgba(255,255,255,.8)}
+
+/* FOOTER */
+footer{background:var(--navy-dark);color:rgba(255,255,255,.5);padding:28px 20px}
+.ft-wrap{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.ft-logo{font-family:Georgia,serif;font-size:18px;font-weight:700}
+.ft-logo .engine{color:#fff} .ft-logo .autos{color:var(--orange)}
+.ft-copy{font-size:12px}
+.ft-links{display:flex;gap:16px}
+.ft-links a{font-size:12px;color:rgba(255,255,255,.4);transition:.2s}
+.ft-links a:hover{color:rgba(255,255,255,.8)}
+
+/* RESPONSIVE */
+@media(max-width:860px){
+  .story-grid,.diff-section{grid-template-columns:1fr;gap:32px}
+  .story-img-wrap,.diff-img{height:260px}
+  .diff-section{padding:32px 24px}
+  .stats-inner{grid-template-columns:repeat(2,1fr)}
+  .stat-item:nth-child(2){border-right:none}
+  .stat-item:nth-child(n+3){border-top:1px solid var(--gray-mid)}
+  .values-grid,.contact-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:560px){
+  .top-strip{display:none}
+  .values-grid,.contact-grid{grid-template-columns:1fr}
+  .cta-buttons{flex-direction:column}
+  .btn-browse,.btn-ghost{width:100%;text-align:center}
+  .ft-wrap{flex-direction:column;text-align:center}
+  .nav-links .nav-link:not(.active){display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- TOP STRIP -->
+<div class="top-strip">
+  <div class="ts-inner">
+    <div class="ts-left">CALL OR TEXT: <strong>+1 (210) 595-9453</strong> &nbsp;|&nbsp; Mon&ndash;Sat 8am&ndash;7pm EST</div>
+    <div class="ts-right">
+      <a href="mailto:Engineswapsupplies@gmail.com">Engineswapsupplies@gmail.com</a>
+      <a href="/admin">Admin Panel</a>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN NAV -->
+<nav class="main-nav">
+  <div class="nav-inner">
+    <a href="/" class="logo-wrap">
+      <div class="logo-text"><span class="logo-engine">ENGINE</span><span class="logo-swap">SWAP</span>&nbsp;<span class="logo-autos">AUTOS</span></div>
+      <div class="logo-sub">Engines &middot; Classic Cars &middot; Performance</div>
+    </a>
+    <div class="nav-links">
+      <a href="/" class="nav-link">Shop</a>
+      <a href="/about" class="nav-link active">About</a>
+      <a href="/" class="btn-back">&larr; Back to Store</a>
+      <a href="/" class="btn-quote" onclick="event.preventDefault();window.location.href='/'">Get a Quote</a>
+    </div>
+  </div>
+</nav>
+
+<!-- TRUST STRIP -->
+<div class="trust-strip">
+  <div class="trust-inner">
+    <span class="trust-item"><span class="ck">&#10003;</span> LS Swaps from $2,995</span>
+    <span class="trust-item"><span class="ck">&#10003;</span> 1-Year Unlimited Warranty</span>
+    <span class="trust-item"><span class="ck">&#10003;</span> Compression Tested</span>
+    <span class="trust-item"><span class="ck">&#10003;</span> Ships Nationwide</span>
+    <span class="trust-item"><span class="ck">&#10003;</span> Financing Available</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="about-hero">
+  <div class="hero-inner">
+    <div class="eyebrow">Est. 2010 &bull; San Antonio, TX</div>
+    <h1>About <em>EngineSwap Autos</em></h1>
+    <p>Your trusted source for LS swap packages, classic muscle cars, and performance engines. Built on honesty, driven by a passion for American iron.</p>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="stats-inner">
+    <div class="stat-item"><span class="stat-num">15+</span><span class="stat-label">Years in Business</span></div>
+    <div class="stat-item"><span class="stat-num">8,400+</span><span class="stat-label">Units Sold</span></div>
+    <div class="stat-item"><span class="stat-num">91+</span><span class="stat-label">Active Listings</span></div>
+    <div class="stat-item"><span class="stat-num">50+</span><span class="stat-label">Countries Shipped</span></div>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="about-body">
+
+  <!-- STORY -->
+  <div class="story-grid">
+    <div>
+      <span class="sec-eyebrow">Our Story</span>
+      <h2>From San Antonio to Nationwide</h2>
+      <p>EngineSwap Autos started in 2010 with a simple idea: give builders, collectors, and enthusiasts access to quality engines and classic cars at honest prices. What began as a small operation in San Antonio has grown into one of the most trusted names in LS swaps and classic car sales in the country.</p>
+      <p>Over 15 years, we have helped thousands of customers find the right engine for their build, the right classic for their garage, or the right complete swap package to make their project a reality. Every unit we sell is compression tested and backed by our 1-year unlimited mileage warranty.</p>
+      <p>Our connections with salvage yards, GM dealers, and private collections across North America allow us to source low-mileage truck LS pullouts, rare muscle cars, and complete swap packages that you simply will not find anywhere else at these prices.</p>
+    </div>
+    <div class="story-img-wrap">
+      <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=900&q=70" alt="EngineSwap Autos workshop" loading="lazy">
+      <div class="story-badge">
+        <strong>Since 2010</strong>
+        <span>San Antonio, Texas</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- VALUES -->
+  <div class="values-section">
+    <span class="sec-eyebrow" style="text-align:center;display:block">Our Values</span>
+    <h2 style="text-align:center">What We Stand For</h2>
+    <p class="values-sub">The principles behind every engine we sell and every car we list</p>
+    <div class="values-grid">
+      <div class="value-card">
+        <h3>Honest Pricing</h3>
+        <p>No inflated asking prices, no hidden fees. We price every item at fair market value so buyers can act with confidence and sellers get results.</p>
+      </div>
+      <div class="value-card">
+        <h3>Technical Expertise</h3>
+        <p>Our team has decades of hands-on experience with LS swaps, classic builds, and performance engines. We know what we sell inside and out.</p>
+      </div>
+      <div class="value-card">
+        <h3>Builder First</h3>
+        <p>We cater to builders, restorers, and enthusiasts. We stock what the community actually needs — not just what looks good on a showroom floor.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIFFERENTIATORS -->
+  <div class="diff-section">
+    <div class="diff-text">
+      <span class="sec-eyebrow" style="color:var(--orange)">Why EngineSwap Autos</span>
+      <h2>What Sets Us Apart</h2>
+      <p>There are a lot of places to buy an engine or a classic car. What makes us different is the combination of low prices, verified quality, and real automotive knowledge behind every listing.</p>
+      <ul class="diff-list">
+        <li>Complete LS swap packages from $2,995 &mdash; ECU and harness included</li>
+        <li>All engines compression and leak-down tested before shipping</li>
+        <li>1-year unlimited mileage warranty on every engine and vehicle</li>
+        <li>Free shipping on orders over $500 &mdash; freight available worldwide</li>
+        <li>Financing available on classic cars and high-value engines</li>
+        <li>Expert support 7 days a week &mdash; real people who know these engines</li>
+        <li>Walkaround videos and cold start videos available on request</li>
+      </ul>
+    </div>
+    <div class="diff-img">
+      <img src="https://images.unsplash.com/photo-1568844293986-ca9c5d4fd6a9?w=800&q=70" alt="Engine inspection" loading="lazy">
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="contact-section">
+    <span class="sec-eyebrow">Contact Us</span>
+    <h2>We Are Here to Help</h2>
+    <p>Available Monday through Saturday, 8am to 7pm EST. We typically respond within a few hours.</p>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <h3>Call Us</h3>
+        <a href="tel:+12105959453">+1 (210) 595-9453</a>
+        <p>Mon&ndash;Sat, 8am&ndash;7pm EST</p>
+      </div>
+      <div class="contact-card">
+        <h3>Email Us</h3>
+        <a href="mailto:Engineswapsupplies@gmail.com">Engineswapsupplies@gmail.com</a>
+        <p>Response within a few hours</p>
+      </div>
+      <div class="contact-card">
+        <h3>Text Us</h3>
+        <a href="sms:+12105959453">+1 (210) 595-9453</a>
+        <p>Text us anytime, we reply fast</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- CTA -->
+<div class="about-cta">
+  <div class="cta-inner">
+    <h2>Ready to Find Your Engine or Classic?</h2>
+    <p>Browse our full inventory of LS swap packages, classic muscle cars, and performance engines. Shipped nationwide. Financing available.</p>
+    <div class="cta-buttons">
+      <a href="/products" class="btn-browse">Browse Inventory</a>
+      <a href="/products?category=engine" class="btn-ghost">Shop LS Packages</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-wrap">
+    <a href="/" class="ft-logo"><span class="engine">ENGINESWAP</span>&nbsp;<span class="autos">AUTOS</span></a>
+    <span class="ft-copy">&copy; 2025 EngineSwap Autos. All rights reserved.</span>
+    <div class="ft-links">
+      <a href="/">Shop</a>
+      <a href="/about">About</a>
+      <a href="/admin">Admin</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
