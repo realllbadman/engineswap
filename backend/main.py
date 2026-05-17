@@ -5,6 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from fastapi.templating import Jinja2Templates
+from jinja2 import Environment, FileSystemLoader
 from contextlib import asynccontextmanager
 from sqlalchemy import func
 from sqlalchemy.orm import Session
@@ -82,7 +83,11 @@ app.add_middleware(
 # Static files (new static/ dir — CSS, JS, images)
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
-templates = Jinja2Templates(directory=TEMPLATES_DIR)
+_jinja_env = Environment(
+    loader=FileSystemLoader(TEMPLATES_DIR),
+    cache_size=0,  # disable LRU cache — fixes unhashable dict TypeError on Python 3.12
+)
+templates = Jinja2Templates(env=_jinja_env)
 
 # ── existing API routes (unchanged) ──────────────────────────────
 app.include_router(bookings.router, prefix="/api/bookings", tags=["bookings"])
