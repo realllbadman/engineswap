@@ -116,8 +116,7 @@ def index(request: Request):
             .all()
         )
         total = db.query(Product).count()
-        return templates.TemplateResponse("index.html", {
-            "request": request,
+        return templates.TemplateResponse(request, "index.html", {
             "products": featured,
             "brand_counts": brand_rows,
             "total_count": total,
@@ -157,8 +156,7 @@ def products_page(request: Request, q: str = "", category: str = ""):
         ordered = _interleave_products(all_products)
 
         total = db.query(Product).count()
-        return templates.TemplateResponse("products.html", {
-            "request": request,
+        return templates.TemplateResponse(request, "products.html", {
             "products": ordered,
             "q": q,
             "category": category,
@@ -181,8 +179,7 @@ def product_detail(request: Request, slug: str):
             .filter(Product.category == product.category, Product.slug != slug)
             .limit(4).all()
         )
-        return templates.TemplateResponse("product_detail.html", {
-            "request": request,
+        return templates.TemplateResponse(request, "product_detail.html", {
             "product": product,
             "features": features,
             "related": related,
@@ -193,7 +190,7 @@ def product_detail(request: Request, slug: str):
 
 @app.get("/checkout")
 def checkout_page(request: Request):
-    return templates.TemplateResponse("checkout.html", {"request": request})
+    return templates.TemplateResponse(request, "checkout.html", {})
 
 
 # ── kept pages (FileResponse) ────────────────────────────────────
