@@ -87,7 +87,7 @@
 
     <div class="product-grid">
       {% for p in products %}
-      <div class="product-card">
+      <div class="product-card" style="cursor:pointer" onclick="window.location='/products/{{ p.slug }}'">
         <div class="card-img-wrap">
           <img src="{{ p.image }}" alt="{{ p.name }}" loading="lazy"
                onerror="this.src='https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=400&q=60'">
@@ -121,6 +121,7 @@
           <div class="card-btn-row">
             <button class="btn-cart-sm"
               {% if not p.in_stock %}disabled{% endif %}
+              onclick="event.stopPropagation()"
               data-slug="{{ p.slug }}"
               data-name="{{ p.name }}"
               data-price="{{ p.price }}"

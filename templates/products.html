@@ -43,7 +43,9 @@
       <div class="product-card"
            data-name="{{ p.name | lower }}"
            data-brand="{{ p.brand | lower }}"
-           data-category="{{ p.category }}">
+           data-category="{{ p.category }}"
+           style="cursor:pointer"
+           onclick="window.location='/products/{{ p.slug }}'">
 
         <div class="card-img-wrap">
           <img src="{{ p.image }}" alt="{{ p.name }}" loading="lazy"
@@ -86,6 +88,7 @@
           <div class="card-btn-row">
             <button class="btn-cart-sm"
               {% if not p.in_stock %}disabled{% endif %}
+              onclick="event.stopPropagation()"
               data-slug="{{ p.slug }}"
               data-name="{{ p.name }}"
               data-price="{{ p.price }}"
