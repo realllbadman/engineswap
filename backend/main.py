@@ -100,15 +100,24 @@ app.include_router(admin.router,    prefix="/api/admin",    tags=["admin"])
 def index(request: Request):
     db = SessionLocal()
     try:
-        # Featured: 4 cars first row, 4 engines second row
-        _car_cats  = ("sedan", "suv", "truck", "sports")
-        cars_feat  = (db.query(Product)
-                      .filter(Product.in_stock == 1, Product.category.in_(_car_cats))
-                      .limit(4).all())
-        eng_feat   = (db.query(Product)
-                      .filter(Product.in_stock == 1, Product.category == "engine")
-                      .limit(4).all())
-        featured   = cars_feat + eng_feat
+        # Featured: 4 classic cars + the 4 main engines in order
+        _car_cats   = ("sedan", "suv", "truck", "sports")
+        cars_feat   = (db.query(Product)
+                       .filter(Product.in_stock == 1, Product.category.in_(_car_cats))
+                       .limit(4).all())
+        # Pull one flagship crate engine for each of the 4 main families
+        _main_slugs = [
+            "lt4-62-supercharged-crate-650hp",
+            "gm-ls3-62-crate",
+            "ford-coyote-50-crate",
+            "gm-lq9-60-package",
+        ]
+        eng_feat = []
+        for slug in _main_slugs:
+            e = db.query(Product).filter(Product.slug == slug, Product.in_stock == 1).first()
+            if e:
+                eng_feat.append(e)
+        featured    = cars_feat + eng_feat
         brand_rows = (
             db.query(Product.brand, func.count(Product.id))
             .group_by(Product.brand)
@@ -125,23 +134,33 @@ def index(request: Request):
         db.close()
 
 
+_MAIN_ENGINE_SLUGS = {
+    "lt4-62-supercharged-crate-650hp", "lt4-62-supercharged-pullout-z06", "lt4-62-stage2-built-750hp",
+    "gm-ls3-62-crate", "gm-ls3-62-pullout", "gm-ls3-62-stage2",
+    "ford-coyote-50-crate", "ford-coyote-50-pullout", "ford-coyote-50-supercharged",
+    "gm-lq9-60-package", "gm-lq9-60-budget", "gm-lq9-60-stage2",
+}
+
 def _interleave_products(products):
-    """Return products in cycling order: engines → cars → transmissions → repeat.
-    When a category filter is active the list is passed through unchanged."""
-    engines  = [p for p in products if p.category == "engine"]
+    """Return products in cycling order: main engines → cars → other engines → transmissions."""
+    main_eng = [p for p in products if p.category == "engine" and p.slug in _MAIN_ENGINE_SLUGS]
+    other_eng = [p for p in products if p.category == "engine" and p.slug not in _MAIN_ENGINE_SLUGS]
     vehicles = [p for p in products if p.category in ("sedan","suv","truck","sports")]
     trans    = [p for p in products if p.category == "transmission"]
 
-    # Only interleave when showing the full mix; pure-category views stay as-is
-    if not (engines and vehicles) and not (engines and trans) and not (vehicles and trans):
-        return products   # single-category view — no interleaving needed
+    # Single-category view — no interleaving needed
+    if not any([main_eng, other_eng]) or not any([vehicles, trans]):
+        if not vehicles and not trans:
+            return main_eng + other_eng  # engine-only: main first, rarely asked last
+        return products
 
-    result, ie, iv, it = [], 0, 0, 0
-    chunk = 3  # one grid row per category
-    while ie < len(engines) or iv < len(vehicles) or it < len(trans):
-        result.extend(engines[ie:ie+chunk]);  ie += chunk
-        result.extend(vehicles[iv:iv+chunk]); iv += chunk
-        result.extend(trans[it:it+chunk]);    it += chunk
+    result, ime, iv, ioe, it = [], 0, 0, 0, 0
+    chunk = 3
+    while ime < len(main_eng) or iv < len(vehicles) or ioe < len(other_eng) or it < len(trans):
+        result.extend(main_eng[ime:ime+chunk]);  ime += chunk
+        result.extend(vehicles[iv:iv+chunk]);    iv  += chunk
+        result.extend(other_eng[ioe:ioe+chunk]); ioe += chunk
+        result.extend(trans[it:it+chunk]);       it  += chunk
     return result
 
 

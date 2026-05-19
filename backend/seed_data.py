@@ -1044,6 +1044,61 @@ PRODUCTS_SEED = [
     },
 
     # ══════════════════════════════════════════════════════════════
+    #  6.2L LT4 — CLIENT FAVORITE (Supercharged, C7 Z06 / Camaro ZL1)
+    # ══════════════════════════════════════════════════════════════
+    {
+        "slug":          "lt4-62-supercharged-crate-650hp",
+        "name":          "6.2L LT4 Supercharged Crate Engine — 650hp (New)",
+        "brand":         "GM",
+        "category":      "engine",
+        "year":          2023,
+        "fuel":          "Gasoline",
+        "transmission":  "N/A",
+        "mileage":       0,
+        "price":         6995,
+        "original_price":7995,
+        "description":   "Brand new GM LT4 6.2L supercharged crate engine. 650hp and 650 lb-ft straight from the factory. Eaton TVS 1.7L supercharger, direct injection, and dry-sump oiling. The same engine that powered the C7 Corvette Z06 and Camaro ZL1. The pinnacle of GM performance.",
+        "features":      ["650hp / 650 lb-ft Supercharged", "Eaton TVS 1.7L Supercharger", "Direct Injection + VVT", "Factory Dry-Sump Oiling"],
+        "in_stock":      True,
+        "badge":         "Best Seller",
+        "image":         "https://tse3.mm.bing.net/th/id/OIP.V3oa5hGpNWBnF1VYi7_8UgHaE7?w=305&h=203&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3",
+    },
+    {
+        "slug":          "lt4-62-supercharged-pullout-z06",
+        "name":          "6.2L LT4 Supercharged Pullout — Z06/ZL1 (650hp)",
+        "brand":         "GM",
+        "category":      "engine",
+        "year":          2019,
+        "fuel":          "Gasoline",
+        "transmission":  "N/A",
+        "mileage":       28000,
+        "price":         5495,
+        "original_price":6500,
+        "description":   "Low-mileage LT4 6.2L supercharged pullout from a C7 Z06 or Camaro ZL1. 650hp, compression and leak-down tested. Comes with supercharger, intercooler, and accessories. Drop-in power for your restomod, C10, or custom build.",
+        "features":      ["650hp Supercharged Pullout", "Low 28k Miles", "Compression & Leak-Down Tested", "Supercharger & Intercooler Included"],
+        "in_stock":      True,
+        "badge":         "Hot Deal",
+        "image":         "https://tse2.mm.bing.net/th/id/OIP.sF3G5Qj8_7X2kZpLmN9-yAHaE8?w=303&h=202&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3",
+    },
+    {
+        "slug":          "lt4-62-stage2-built-750hp",
+        "name":          "6.2L LT4 Stage 2 Built Package — 750hp+",
+        "brand":         "GM",
+        "category":      "engine",
+        "year":          2020,
+        "fuel":          "Gasoline",
+        "transmission":  "N/A",
+        "mileage":       0,
+        "price":         6495,
+        "original_price":7500,
+        "description":   "LT4 6.2L built Stage 2 — ported supercharger, upgraded internals, camshaft, and long-tube headers. 750hp+ on the dyno. Pre-tuned and ready to install. The ultimate turn-key GM supercharged package for serious street and strip builds.",
+        "features":      ["750hp+ Dyno Proven", "Ported & Upgraded Supercharger", "Forged Internals", "Pre-Tuned — Ready to Install"],
+        "in_stock":      True,
+        "badge":         "Top Pick",
+        "image":         "https://tse1.mm.bing.net/th/id/OIP.kX9mP2Rq7nWvLsT4cJ8ZkgHaE8?w=303&h=202&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3",
+    },
+
+    # ══════════════════════════════════════════════════════════════
     #  TRANSMISSIONS
     # ══════════════════════════════════════════════════════════════
     {
