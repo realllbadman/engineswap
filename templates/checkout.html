@@ -325,7 +325,7 @@
     btn.textContent = 'Placing order...';
 
     try {
-      var res = await fetch('/api/orders', {
+      var res = await fetch('/api/orders/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
