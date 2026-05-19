@@ -768,7 +768,7 @@ PRODUCTS_SEED = [
         "features":      ["5.3L LM7 with ECU & Harness", "Low Mileage Truck Pullout", "Compression Tested", "Ready to Swap"],
         "in_stock":      True,
         "badge":         "Best Seller",
-        "image":         "https://tse4.mm.bing.net/th/id/OIP.Opmljyyje-fC9cy1KI8wwwHaEK?w=286&h=180&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3",
+        "image":         "https://i.ebayimg.com/images/g/-n0AAeSw7pFp-oz-/s-l960.webp",
     },
     {
         "slug":          "ls-53-lm7-4l60e-combo",
@@ -785,7 +785,7 @@ PRODUCTS_SEED = [
         "features":      ["5.3L LM7 + 4L60E Combo", "ECU & Harness Included", "Compression Tested", "Drop-In Ready Package"],
         "in_stock":      True,
         "badge":         "Hot Deal",
-        "image":         "https://th.bing.com/th/id/OIP.uRBWze4Uol0NhMhpRCsfyAHaFj?w=257&h=193&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3",
+        "image":         "https://i.ebayimg.com/images/g/IqoAAeSw0IdqA6IM/s-l960.webp",
     },
     {
         "slug":          "ls-60-lq4-complete-pullout",
@@ -802,7 +802,7 @@ PRODUCTS_SEED = [
         "features":      ["6.0L LQ4 LS V8", "ECU & Harness Included", "Compression Tested", "Ideal for Trucks & C10 Swaps"],
         "in_stock":      True,
         "badge":         None,
-        "image":         "https://th.bing.com/th/id/OIP.-sFccORBUwhe02V6ZpRbdQHaFj?w=268&h=180&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3",
+        "image":         "https://i.ebayimg.com/images/g/alQAAOSwVlVZ8St7/s-l960.webp",
     },
     {
         "slug":          "ls-complete-swap-kit-53",
@@ -819,7 +819,7 @@ PRODUCTS_SEED = [
         "features":      ["5.3L + 4L60E Complete Package", "Standalone Harness & ECU", "Flex Plate & All Brackets", "Turn-Key Swap — Ships Nationwide"],
         "in_stock":      True,
         "badge":         "Hot Deal",
-        "image":         "https://th.bing.com/th/id/OIP.oqCyehq8JFQzXk8w5p2Z4wHaEK?w=280&h=180&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3",
+        "image":         "https://i.ebayimg.com/images/g/4gUAAeSwvSpqAh1Y/s-l1600.webp",
     },
 
 
@@ -841,7 +841,7 @@ PRODUCTS_SEED = [
         "features":      ["430hp / 424 lb-ft", "Brand New — Zero Miles", "Aluminum Block & Heads", "Complete Assembly — Ships Nationwide"],
         "in_stock":      True,
         "badge":         "Best Seller",
-        "image":         "https://tse4.mm.bing.net/th/id/OIP.7dT_TXmSrbobujCYKjixdQHaJQ?w=130&h=180&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3",
+        "image":         "https://i.ebayimg.com/images/g/kUYAAeSwAYxpuXq2/s-l960.webp",
     },
     {
         "slug":          "gm-ls3-62-pullout",
@@ -858,7 +858,7 @@ PRODUCTS_SEED = [
         "features":      ["430hp / 424 lb-ft", "Low Mileage Camaro SS Pullout", "Compression & Leak-Down Tested", "Ready to Swap — Ships Nationwide"],
         "in_stock":      True,
         "badge":         "Hot Deal",
-        "image":         "https://tse4.mm.bing.net/th/id/OIP.1RoO9xMODuc5njMOHitQfAHaFv?w=247&h=192&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3",
+        "image":         "https://i.ebayimg.com/images/g/FrgAAeSwvTlplZ1s/s-l960.webp",
     },
     {
         "slug":          "gm-ls3-62-stage2",
@@ -875,7 +875,7 @@ PRODUCTS_SEED = [
         "features":      ["490hp+ Stage 2 Build", "Ported & Polished Heads", "Performance Camshaft", "Pre-Tuned & Dyno Tested"],
         "in_stock":      True,
         "badge":         None,
-        "image":         "https://tse3.mm.bing.net/th/id/OIP.DsOMmIpFu9fgvCSZsLybjgHaFj?w=246&h=184&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3",
+        "image":         "https://i.ebayimg.com/images/g/D1AAAeSw4GNp9NqO/s-l960.webp",
     },
 
     # ══════════════════════════════════════════════════════════════
@@ -896,7 +896,7 @@ PRODUCTS_SEED = [
         "features":      ["450hp / 410 lb-ft", "Brand New — Zero Miles", "DOHC Ti-VCT Variable Cam", "Complete Assembly — Ships Nationwide"],
         "in_stock":      True,
         "badge":         "Best Seller",
-        "image":         "https://tse1.mm.bing.net/th/id/OIP.9-E54PsbIeZXwSD3TgHtDwHaE8?w=299&h=199&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3",
+        "image":         "https://i.ebayimg.com/images/g/ix0AAeSwPL5p839o/s-l960.webp",
     },
     {
         "slug":          "ford-coyote-50-pullout",
@@ -913,7 +913,7 @@ PRODUCTS_SEED = [
         "features":      ["450hp / 410 lb-ft", "Low Mileage Mustang Pullout", "Compression Tested", "Complete with Accessories"],
         "in_stock":      True,
         "badge":         None,
-        "image":         "https://tse4.mm.bing.net/th/id/OIP.B8eaxIh1O7cl8IveaSL1awHaFj?w=228&h=180&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3",
+        "image":         "https://i.ebayimg.com/images/g/RiwAAeSwEGZptzWu/s-l960.webp",
     },
     {
         "slug":          "ford-coyote-50-supercharged",
@@ -930,7 +930,7 @@ PRODUCTS_SEED = [
         "features":      ["700hp+ on Pump Gas", "Whipple 2.9L Supercharger", "Fuel System Upgraded", "Full Tune Included"],
         "in_stock":      True,
         "badge":         "Hot Deal",
-        "image":         "https://tse2.mm.bing.net/th/id/OIP.q6l5okLQCzEGvSgc18yUXwHaHI?w=224&h=187&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3",
+        "image":         "https://i.ebayimg.com/images/g/5ekAAeSw13Zp9Cc0/s-l1600.webp",
     },
 
     # ══════════════════════════════════════════════════════════════
@@ -951,7 +951,7 @@ PRODUCTS_SEED = [
         "features":      ["485hp / 475 lb-ft", "Brand New — Zero Miles", "Hemispherical Combustion Chambers", "Complete Assembly — Ships Nationwide"],
         "in_stock":      True,
         "badge":         "Best Seller",
-        "image":         "https://tse2.mm.bing.net/th/id/OIP.JZ7uvvPHC1oQnRCtQzKXdwHaFj?w=271&h=180&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3",
+        "image":         "https://i.ebayimg.com/images/g/FNoAAeSw5UxpZ2F6/s-l960.webp",
     },
     {
         "slug":          "dodge-392-hemi-pullout",
@@ -968,7 +968,7 @@ PRODUCTS_SEED = [
         "features":      ["485hp / 475 lb-ft", "Low Mileage Challenger Pullout", "Compression Tested", "All Accessories Included"],
         "in_stock":      True,
         "badge":         None,
-        "image":         "https://tse2.mm.bing.net/th/id/OIP.gYhn6QcC4h9Mx5jeBMvtAAHaFj?w=1024&h=768&rs=1&pid=ImgDetMain&o=7&rm=3",
+        "image":         "https://i.ebayimg.com/images/g/w9oAAeSw2SVpvVLf/s-l960.webp",
     },
     {
         "slug":          "dodge-392-hemi-stage2",
@@ -985,7 +985,7 @@ PRODUCTS_SEED = [
         "features":      ["540hp+ Stage 2 Build", "Ported Cylinder Heads", "Stage 2 Performance Cam", "Long-Tube Headers Included"],
         "in_stock":      True,
         "badge":         None,
-        "image":         "https://tse3.mm.bing.net/th/id/OIP.T_N0c9z0-soA50vb4rQBVgAAAA?w=300&h=300&rs=1&pid=ImgDetMain&o=7&rm=3",
+        "image":         "https://i.ebayimg.com/images/g/7ZUAAeSwNIpp3Shv/s-l960.webp",
     },
 
     # ══════════════════════════════════════════════════════════════
@@ -1006,7 +1006,7 @@ PRODUCTS_SEED = [
         "features":      ["345hp / 380 lb-ft", "6.0L LQ9 Cast-Iron Block", "ECU & Harness Included", "Heavy-Duty LS Platform"],
         "in_stock":      True,
         "badge":         "Best Seller",
-        "image":         "https://www.motorverso.com/wp-content/uploads/2022/12/6.0-GM-Engine-1-1536x1024.jpg",
+        "image":         "https://i.ebayimg.com/images/g/FpAAAOSw-kdXxKIJ/s-l960.webp",
     },
     {
         "slug":          "gm-lq9-60-budget",
@@ -1023,7 +1023,7 @@ PRODUCTS_SEED = [
         "features":      ["345hp / 380 lb-ft", "Cast-Iron Block — Bulletproof", "Compression Tested", "Budget Entry-Level LS Swap"],
         "in_stock":      True,
         "badge":         None,
-        "image":         "https://tse4.mm.bing.net/th/id/OIP.dn_mseK1oFms_ykC4pnMZQHaHa?w=189&h=189&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3",
+        "image":         "https://i.ebayimg.com/images/g/zhYAAOSwVdlgb1yY/s-l960.webp",
     },
     {
         "slug":          "gm-lq9-60-stage2",
@@ -1040,7 +1040,7 @@ PRODUCTS_SEED = [
         "features":      ["450hp+ Dyno Tested", "Stage 2 Cam & Heads", "Performance Intake & Headers", "LS Reliability + Serious Power"],
         "in_stock":      True,
         "badge":         "Hot Deal",
-        "image":         "https://tse2.mm.bing.net/th/id/OIP.1O6aZsmIc6SavPuy-tbmswAAAA?w=258&h=194&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3",
+        "image":         "https://i.ebayimg.com/images/g/~yAAAeSwE2Fp~MZg/s-l960.webp",
     },
 
     # ══════════════════════════════════════════════════════════════
@@ -1061,10 +1061,10 @@ PRODUCTS_SEED = [
         "features":      ["650hp / 650 lb-ft Supercharged", "Eaton TVS 1.7L Supercharger", "Direct Injection + VVT", "Factory Dry-Sump Oiling"],
         "in_stock":      True,
         "badge":         "Best Seller",
-        "image":         "https://tse3.mm.bing.net/th/id/OIP.V3oa5hGpNWBnF1VYi7_8UgHaE7?w=305&h=203&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3",
+        "image":         "https://i.ebayimg.com/images/g/HGAAAeSwWi9p-Dhk/s-l960.webp",
     },
     {
-        "slug":          "lt4-62-supercharged-pullout-z06",
+        "slug":          "lt4-62-supercharged-pullout-z06", 
         "name":          "6.2L LT4 Supercharged Pullout — Z06/ZL1 (650hp)",
         "brand":         "GM",
         "category":      "engine",
@@ -1078,7 +1078,7 @@ PRODUCTS_SEED = [
         "features":      ["650hp Supercharged Pullout", "Low 28k Miles", "Compression & Leak-Down Tested", "Supercharger & Intercooler Included"],
         "in_stock":      True,
         "badge":         "Hot Deal",
-        "image":         "https://tse2.mm.bing.net/th/id/OIP.sF3G5Qj8_7X2kZpLmN9-yAHaE8?w=303&h=202&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3",
+        "image":         "https://i.ebayimg.com/images/g/p~EAAeSwFo9o37R7/s-l960.webp",
     },
     {
         "slug":          "lt4-62-stage2-built-750hp",
@@ -1095,7 +1095,7 @@ PRODUCTS_SEED = [
         "features":      ["750hp+ Dyno Proven", "Ported & Upgraded Supercharger", "Forged Internals", "Pre-Tuned — Ready to Install"],
         "in_stock":      True,
         "badge":         "Top Pick",
-        "image":         "https://tse1.mm.bing.net/th/id/OIP.kX9mP2Rq7nWvLsT4cJ8ZkgHaE8?w=303&h=202&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3",
+        "image":         "https://i.ebayimg.com/images/g/JE4AAeSwwpVpgmOl/s-l1600.webp",
     },
 
     # ══════════════════════════════════════════════════════════════
@@ -1290,11 +1290,11 @@ PRODUCTS_SEED = [
         "features":      ["5.3L LM7 — Low Mileage", "Standalone Harness & Tuned ECU", "Compression Tested", "Turn-Key — No Extra Parts Needed"],
         "in_stock":      True,
         "badge":         "Best Seller",
-        "image":         "https://th.bing.com/th/id/OIP.ixw6ckY_ICufB6PcMwZKvgHaFF?w=282&h=194&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3",
+        "image":         "https://i.ebayimg.com/images/g/~70AAeSwwRFqA5A3/s-l1600.webp",
     },
     {
-        "slug":          "gm-lq4-60-swap-kit",
-        "name":          "6.0L LQ4 Complete LS Swap Kit",
+        "slug":          "gm-lq4-60-swap-kit", 
+        "name":          "Complete LS Swap Kit",
         "brand":         "Chevrolet",
         "category":      "engine",
         "year":          2018,
@@ -1307,7 +1307,7 @@ PRODUCTS_SEED = [
         "features":      ["6.0L LQ4 Iron Block — 345hp", "ECU & Harness Included", "High Torque Output", "Preferred for Truck & C10 Swaps"],
         "in_stock":      True,
         "badge":         None,
-        "image":         "https://th.bing.com/th/id/OIP.U2F7lOecp7QRKRgeR9QwiQHaFj?w=232&h=180&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3",
+        "image":         "https://i.ebayimg.com/images/g/1TkAAeSweUpp63-~/s-l1600.webp",
     },
     {
         "slug":          "dodge-392-hemi-low-mile",
@@ -1324,6 +1324,6 @@ PRODUCTS_SEED = [
         "features":      ["485hp / 475 lb-ft", "Only 32,000 Miles — Exceptional", "Compression & Leak-Down Tested", "All Accessories Included"],
         "in_stock":      True,
         "badge":         "Hot Deal",
-        "image":   "https://th.bing.com/th/id/OIP.HQsgnzF8EGXz0I7zVb4lrQHaJ4?w=125&h=180&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3",
+        "image":   "https://i.ebayimg.com/images/g/OJkAAOSwGlNgc7vS/s-l960.webp",
     },
 ]
