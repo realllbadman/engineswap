@@ -520,6 +520,15 @@ footer { background: var(--navy-dark); color: var(--white); padding: 54px 20px 0
 }
 .btn-details-sm:hover { background: var(--orange-hover); }
 
+.btn-quote-card {
+  width: 100%; margin-top: 8px; padding: 9px 8px;
+  background: transparent; color: var(--navy);
+  border: 2px solid var(--navy); border-radius: 4px;
+  font-weight: 700; font-size: 12.5px; cursor: pointer;
+  transition: background .2s, color .2s;
+}
+.btn-quote-card:hover { background: var(--navy); color: var(--white); }
+
 /* ════════════════════════════════════════════════════════
    CART DRAWER
    ════════════════════════════════════════════════════════ */

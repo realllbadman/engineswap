@@ -1290,7 +1290,7 @@ PRODUCTS_SEED = [
         "features":      ["5.3L LM7 — Low Mileage", "Standalone Harness & Tuned ECU", "Compression Tested", "Turn-Key — No Extra Parts Needed"],
         "in_stock":      True,
         "badge":         "Best Seller",
-        "image":         "https://tse1.mm.bing.net/th/id/OIP.XxPHfCEgrFd3VaLSOQIEBwHaEK?w=288&h=180&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3",
+        "image":         "https://th.bing.com/th/id/OIP.ixw6ckY_ICufB6PcMwZKvgHaFF?w=282&h=194&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3",
     },
     {
         "slug":          "gm-lq4-60-swap-kit",
@@ -1307,7 +1307,7 @@ PRODUCTS_SEED = [
         "features":      ["6.0L LQ4 Iron Block — 345hp", "ECU & Harness Included", "High Torque Output", "Preferred for Truck & C10 Swaps"],
         "in_stock":      True,
         "badge":         None,
-        "image":         "https://tse4.mm.bing.net/th/id/OIP.3xO4u1tb-hxchK5f-c1qKAHaEK?w=256&h=180&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3",
+        "image":         "https://th.bing.com/th/id/OIP.U2F7lOecp7QRKRgeR9QwiQHaFj?w=232&h=180&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3",
     },
     {
         "slug":          "dodge-392-hemi-low-mile",
@@ -1324,6 +1324,6 @@ PRODUCTS_SEED = [
         "features":      ["485hp / 475 lb-ft", "Only 32,000 Miles — Exceptional", "Compression & Leak-Down Tested", "All Accessories Included"],
         "in_stock":      True,
         "badge":         "Hot Deal",
-        "image":         "https://tse3.mm.bing.net/th/id/OIP.PptVGbNcI2OlqgF8F5_72gHaHa?w=193&h=194&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3",
+        "image":   "https://th.bing.com/th/id/OIP.HQsgnzF8EGXz0I7zVb4lrQHaJ4?w=125&h=180&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3",
     },
 ]

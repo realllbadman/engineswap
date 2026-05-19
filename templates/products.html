@@ -97,8 +97,9 @@
               data-fuel="{{ p.fuel }}">
               Add to Cart
             </button>
-            <a href="/products/{{ p.slug }}" class="btn-details-sm">Details</a>
+            <a href="/products/{{ p.slug }}" class="btn-details-sm" onclick="event.stopPropagation()">Details</a>
           </div>
+          <button class="btn-quote-card" onclick="event.stopPropagation(); openQuoteModal('{{ p.name }}')">Request a Quote</button>
         </div>
       </div>
       {% endfor %}

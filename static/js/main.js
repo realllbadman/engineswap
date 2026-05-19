@@ -151,13 +151,17 @@ function updateBadges(cart) {
 /* ══════════════════════════════════════════════════════
    QUOTE MODAL
    ══════════════════════════════════════════════════════ */
-function openQuoteModal() {
+function openQuoteModal(productName) {
   const modal   = document.getElementById('quote-modal');
   const form    = document.getElementById('quote-form');
   const success = document.getElementById('quote-success-msg');
   if (form)    { form.reset(); form.style.display = 'block'; }
   if (success) { success.style.display = 'none'; }
   if (modal)   { modal.classList.add('show'); document.body.style.overflow = 'hidden'; }
+  if (productName && form) {
+    const interest = form.querySelector('[name="vehicle_interest"]');
+    if (interest) interest.value = productName;
+  }
 }
 
 function closeQuoteModal() {

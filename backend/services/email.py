@@ -99,7 +99,7 @@ async def send_owner_notification(booking):
         <div class="row"><span class="label">Vehicle Interest</span><span class="val">{booking.vehicle_interest or '—'}</span></div>
         <div class="row"><span class="label">Details</span><span class="val">{booking.details or '—'}</span></div>
         <div class="row"><span class="label">Status</span><span class="val">{booking.status}</span></div>
-        <p style="margin-top:24px;"><a href="http://localhost:8002/admin" style="background:{ACCENT};color:#fff;padding:10px 20px;text-decoration:none;border-radius:4px;">View in Admin Panel</a></p>
+        <p style="margin-top:24px;"><a href="https://engineswapautos.com/admin" style="background:{ACCENT};color:#fff;padding:10px 20px;text-decoration:none;border-radius:4px;">View in Admin Panel</a></p>
         """
         await _send(OWNER_EMAIL, f"[{BUSINESS_NAME}] New Quote — {booking.first_name} {booking.last_name}", _base_html("New Quote Request", body))
     except Exception as e:
@@ -157,7 +157,7 @@ async def send_order_owner_notification(customer, items, total, shipping):
           <tr class="total-row"><td colspan="4">Total</td><td>${total:,.2f}</td></tr>
         </table>
         <div class="row"><span class="label">Notes</span><span class="val">{customer.get('notes','—')}</span></div>
-        <p style="margin-top:24px;"><a href="http://localhost:8002/admin" style="background:{ACCENT};color:#fff;padding:10px 20px;text-decoration:none;border-radius:4px;">View in Admin Panel</a></p>
+        <p style="margin-top:24px;"><a href="https://engineswapautos.com/admin" style="background:{ACCENT};color:#fff;padding:10px 20px;text-decoration:none;border-radius:4px;">View in Admin Panel</a></p>
         """
         await _send(OWNER_EMAIL, f"[{BUSINESS_NAME}] New Order — {customer['first_name']} {customer['last_name']} — ${total:,.2f}", _base_html("New Order", body))
     except Exception as e:
