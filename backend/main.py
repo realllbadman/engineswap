@@ -117,7 +117,7 @@ def index(request: Request):
             e = db.query(Product).filter(Product.slug == slug, Product.in_stock == 1).first()
             if e:
                 eng_feat.append(e)
-        featured    = cars_feat + eng_feat
+        featured    = [p for pair in zip(cars_feat, eng_feat) for p in pair]
         brand_rows = (
             db.query(Product.brand, func.count(Product.id))
             .group_by(Product.brand)
