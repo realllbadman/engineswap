@@ -1061,7 +1061,7 @@ PRODUCTS_SEED = [
         "features":      ["650hp / 650 lb-ft Supercharged", "Eaton TVS 1.7L Supercharger", "Direct Injection + VVT", "Factory Dry-Sump Oiling"],
         "in_stock":      True,
         "badge":         "Best Seller",
-        "image":         "https://i.ebayimg.com/images/g/HGAAAeSwWi9p-Dhk/s-l960.webp",
+        "image":         "/static/images/lt4-crate-engine.jpeg",
     },
     {
         "slug":          "lt4-62-supercharged-pullout-z06", 
