@@ -10,7 +10,7 @@ from contextlib import asynccontextmanager
 from sqlalchemy import func
 from sqlalchemy.orm import Session
 from backend.database import engine, Base, SessionLocal
-from backend.routes import bookings, orders, admin
+from backend.routes import orders, admin
 from backend.models import Product
 from backend.seed_data import PRODUCTS_SEED
 
@@ -90,7 +90,6 @@ _jinja_env = Environment(
 templates = Jinja2Templates(env=_jinja_env)
 
 # ── existing API routes (unchanged) ──────────────────────────────
-app.include_router(bookings.router, prefix="/api/bookings", tags=["bookings"])
 app.include_router(orders.router,   prefix="/api/orders",   tags=["orders"])
 app.include_router(admin.router,    prefix="/api/admin",    tags=["admin"])
 

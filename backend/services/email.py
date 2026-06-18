@@ -70,42 +70,6 @@ async def _send(to: str, subject: str, html: str):
     print(f"[email] Sent OK → {to}")
 
 
-async def send_customer_confirmation(booking):
-    try:
-        body = f"""
-        <h2>We received your quote request!</h2>
-        <p>Hi {booking.first_name}, thank you for reaching out to {BUSINESS_NAME}. Our team will contact you shortly.</p>
-        <div class="row"><span class="label">Name</span><span class="val">{booking.first_name} {booking.last_name}</span></div>
-        <div class="row"><span class="label">Phone</span><span class="val">{booking.phone}</span></div>
-        <div class="row"><span class="label">Email</span><span class="val">{booking.email}</span></div>
-        <div class="row"><span class="label">Service</span><span class="val">{booking.service or 'General Inquiry'}</span></div>
-        <div class="row"><span class="label">Vehicle Interest</span><span class="val">{booking.vehicle_interest or '—'}</span></div>
-        <div class="row"><span class="label">Details</span><span class="val">{booking.details or '—'}</span></div>
-        <p style="margin-top:24px;">Questions? Call us: <strong>{OWNER_PHONE}</strong> or reply to this email.</p>
-        """
-        await _send(booking.email, f"Quote Request Received — {BUSINESS_NAME}", _base_html("Quote Received", body))
-    except Exception as e:
-        print(f"[email] customer confirmation failed: {e}")
-
-
-async def send_owner_notification(booking):
-    try:
-        body = f"""
-        <h2>New Quote Request <span class="badge">#{booking.id}</span></h2>
-        <div class="row"><span class="label">Name</span><span class="val">{booking.first_name} {booking.last_name}</span></div>
-        <div class="row"><span class="label">Phone</span><span class="val">{booking.phone}</span></div>
-        <div class="row"><span class="label">Email</span><span class="val">{booking.email}</span></div>
-        <div class="row"><span class="label">Service</span><span class="val">{booking.service or '—'}</span></div>
-        <div class="row"><span class="label">Vehicle Interest</span><span class="val">{booking.vehicle_interest or '—'}</span></div>
-        <div class="row"><span class="label">Details</span><span class="val">{booking.details or '—'}</span></div>
-        <div class="row"><span class="label">Status</span><span class="val">{booking.status}</span></div>
-        <p style="margin-top:24px;"><a href="https://engineswapautos.com/admin" style="background:{ACCENT};color:#fff;padding:10px 20px;text-decoration:none;border-radius:4px;">View in Admin Panel</a></p>
-        """
-        await _send(OWNER_EMAIL, f"[{BUSINESS_NAME}] New Quote — {booking.first_name} {booking.last_name}", _base_html("New Quote Request", body))
-    except Exception as e:
-        print(f"[email] owner notification failed: {e}")
-
-
 async def send_order_customer_confirmation(customer, items, total, shipping):
     try:
         rows = "".join(

@@ -47,7 +47,6 @@
         <div class="nav-phone-label">CALL OR TEXT US</div>
         <a href="tel:+12105959453" class="nav-phone-num">+1 (210) 595-9453</a>
       </div>
-      <button type="button" class="btn-quote" onclick="openQuoteModal()">GET A QUOTE</button>
       <button type="button" class="btn-cart" id="nav-cart-btn" title="View cart">
         Cart <span class="cart-count-badge" id="cart-badge"></span>
       </button>
@@ -68,7 +67,6 @@
     <a href="/products?category=truck">Trucks</a>
     <a href="/about">About Us</a>
     <a href="tel:+12105959453">+1 (210) 595-9453</a>
-    <button type="button" onclick="openQuoteModal()" style="margin:8px 16px;padding:12px;background:#e87722;color:#fff;border:none;border-radius:6px;font-size:14px;font-weight:700;cursor:pointer;width:calc(100% - 32px)">REQUEST A QUOTE</button>
   </div>
 </nav>
 
@@ -171,67 +169,22 @@
   </div>
 </div>
 
-<!-- QUOTE MODAL -->
-<div class="order-modal" id="quote-modal" onclick="handleModalClick(event,'quote-modal')">
-  <div class="order-modal-inner" style="max-width:540px">
-    <div class="omodal-head">
-      <h3>Request a Quote</h3>
-      <button class="omodal-close" onclick="closeQuoteModal()">&times;</button>
-    </div>
-    <div class="omodal-body">
-      <form id="quote-form" onsubmit="submitQuote(event)">
-        <div class="ofield-group">
-          <div class="ofield"><label>First Name</label><input type="text" name="first_name" required placeholder="John"></div>
-          <div class="ofield"><label>Last Name</label><input type="text" name="last_name" required placeholder="Smith"></div>
-        </div>
-        <div class="ofield-group">
-          <div class="ofield"><label>Phone</label><input type="tel" name="phone" required placeholder="+1 (555) 000-0000"></div>
-          <div class="ofield"><label>Email</label><input type="email" name="email" required placeholder="john@email.com"></div>
-        </div>
-        <div class="ofield-group full">
-          <div class="ofield"><label>Vehicle / Engine Interest <span class="opt">(optional)</span></label>
-            <input type="text" name="vehicle_interest" placeholder="e.g. GM LS3 6.2L, 1969 Dodge Charger"></div>
-        </div>
-        <div class="ofield-group">
-          <div class="ofield"><label>Quantity</label>
-            <select name="quantity"><option>1</option><option>2</option><option>3</option><option>4</option><option>5+</option></select>
-          </div>
-          <div class="ofield"><label>Timeline</label>
-            <select name="timeline">
-              <option>As soon as possible</option><option>Within 1 week</option>
-              <option>Within 1 month</option><option>Just researching</option>
-            </select>
-          </div>
-        </div>
-        <div class="ofield-group full">
-          <div class="ofield"><label>Message <span class="opt">(optional)</span></label>
-            <textarea name="details" rows="3" placeholder="Tell us what you are looking for&hellip;"></textarea>
-          </div>
-        </div>
-        <button type="submit" class="btn-submit-order">Submit Quote Request</button>
-      </form>
-      <div class="order-success-msg" id="quote-success-msg">
-        <h3>Quote Request Sent</h3>
-        <p>We will get back to you within 24 hours. Check your email for confirmation.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
 <script src="/static/js/main.js"></script>
 {% block extra_scripts %}{% endblock %}
 
-<!-- Smartsupp Live Chat script -->
+<!--Start of Tawk.to Script-->
 <script type="text/javascript">
-var _smartsupp = _smartsupp || {};
-_smartsupp.key = '65b4ec93525cb11af427c2b74f8e6901df83e1fb';
-window.smartsupp||(function(d) {
-	var s,c,o=smartsupp=function(){ o._.push(arguments)};o._=[];
-	s=d.getElementsByTagName('script')[0];c=d.createElement('script');
-	c.type='text/javascript';c.charset='utf-8';c.async=true;
-	c.src='https://www.smartsuppchat.com/loader.js?';s.parentNode.insertBefore(c,s);
-})(document);
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/6a3067e9aca9b41d46d772d9/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
 </script>
+<!--End of Tawk.to Script-->
 
 </body>
 </html>

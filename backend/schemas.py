@@ -3,37 +3,6 @@ from typing import Optional, List
 from pydantic import BaseModel
 
 
-class BookingCreate(BaseModel):
-    first_name: str
-    last_name: str
-    phone: str
-    email: str
-    service: Optional[str] = "General Inquiry"
-    vehicle_interest: Optional[str] = None
-    details: Optional[str] = None
-
-
-class BookingUpdate(BaseModel):
-    status: Optional[str] = None
-    notes: Optional[str] = None
-
-
-class BookingOut(BaseModel):
-    id: int
-    first_name: str
-    last_name: str
-    phone: str
-    email: str
-    service: Optional[str]
-    vehicle_interest: Optional[str]
-    details: Optional[str]
-    status: str
-    created_at: datetime
-    notes: Optional[str]
-
-    model_config = {"from_attributes": True}
-
-
 class OrderItem(BaseModel):
     product_id: str
     name: str

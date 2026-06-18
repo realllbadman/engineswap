@@ -6,8 +6,8 @@ from fastapi.security import HTTPBasic, HTTPBasicCredentials
 from sqlalchemy.orm import Session
 from sqlalchemy import func
 from backend.database import get_db
-from backend.models import Booking, Order
-from backend.schemas import BookingOut, BookingUpdate, OrderOut, OrderUpdate
+from backend.models import Order
+from backend.schemas import OrderOut, OrderUpdate
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -36,46 +36,10 @@ def get_stats(db: Session = Depends(get_db), _=Depends(require_auth)):
     now = datetime.now(timezone.utc)
     month_start = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
     return {
-        "total_quotes": db.query(Booking).count(),
-        "pending_quotes": db.query(Booking).filter(Booking.status == "pending").count(),
         "total_orders": db.query(Order).count(),
         "pending_orders": db.query(Order).filter(Order.status == "pending").count(),
         "orders_month": db.query(Order).filter(Order.created_at >= month_start).count(),
     }
-
-
-@router.get("/bookings", response_model=list[BookingOut])
-def list_bookings(db: Session = Depends(get_db), _=Depends(require_auth)):
-    return db.query(Booking).order_by(Booking.created_at.desc()).all()
-
-
-@router.get("/bookings/{booking_id}", response_model=BookingOut)
-def get_booking(booking_id: int, db: Session = Depends(get_db), _=Depends(require_auth)):
-    b = db.query(Booking).get(booking_id)
-    if not b:
-        raise HTTPException(404, "Not found")
-    return b
-
-
-@router.patch("/bookings/{booking_id}", response_model=BookingOut)
-def update_booking(booking_id: int, payload: BookingUpdate, db: Session = Depends(get_db), _=Depends(require_auth)):
-    b = db.query(Booking).get(booking_id)
-    if not b:
-        raise HTTPException(404, "Not found")
-    for k, v in payload.model_dump(exclude_none=True).items():
-        setattr(b, k, v)
-    db.commit()
-    db.refresh(b)
-    return b
-
-
-@router.delete("/bookings/{booking_id}", status_code=204)
-def delete_booking(booking_id: int, db: Session = Depends(get_db), _=Depends(require_auth)):
-    b = db.query(Booking).get(booking_id)
-    if not b:
-        raise HTTPException(404, "Not found")
-    db.delete(b)
-    db.commit()
 
 
 @router.get("/orders", response_model=list[OrderOut])

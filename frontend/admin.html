@@ -278,14 +278,11 @@ tbody tr:hover td{background:#fafbfc}
       <div class="stat-card"><div class="num" id="s-orders">—</div><div class="lbl">Total Orders</div></div>
       <div class="stat-card accent"><div class="num" id="s-porders">—</div><div class="lbl">Pending Orders</div></div>
       <div class="stat-card"><div class="num" id="s-month">—</div><div class="lbl">Orders This Month</div></div>
-      <div class="stat-card"><div class="num" id="s-quotes">—</div><div class="lbl">Total Quotes</div></div>
-      <div class="stat-card accent"><div class="num" id="s-pquotes">—</div><div class="lbl">Pending Quotes</div></div>
     </div>
 
     <!-- TABS -->
     <div class="tabs">
       <button class="tab active" onclick="switchTab('orders',this)">Orders</button>
-      <button class="tab" onclick="switchTab('quotes',this)">Quote Requests</button>
     </div>
 
     <!-- ORDERS PANEL -->
@@ -303,20 +300,6 @@ tbody tr:hover td{background:#fafbfc}
       </div>
     </div>
 
-    <!-- QUOTES PANEL -->
-    <div class="table-panel" id="panel-quotes" style="display:none">
-      <div class="panel-header">
-        <h3>Quote Requests</h3>
-        <div class="search-box"><input type="text" placeholder="Search quotes…" oninput="filterTable('quotes-table',this.value)"></div>
-        <span class="refresh-info" id="refresh-info-quotes">Refreshes in <span id="cd-quotes">60</span>s</span>
-      </div>
-      <div style="overflow-x:auto">
-        <table id="quotes-table">
-          <thead><tr><th>Date</th><th>Name</th><th>Phone</th><th>Email</th><th>Vehicle Interest</th><th>Details</th><th>Status</th><th>Actions</th></tr></thead>
-          <tbody id="quotes-body"><tr><td colspan="8" class="no-data">Loading…</td></tr></tbody>
-        </table>
-      </div>
-    </div>
   </div>
 </div>
 
@@ -354,7 +337,7 @@ let authHeader = '';
 let currentTab = 'orders';
 let detailId = null;
 let detailType = null;
-let ordersData = [], quotesData = [];
+let ordersData = [];
 let countdown = 60;
 let countdownInterval = null;
 
@@ -395,7 +378,7 @@ function apiFetch(url, opts = {}) {
 
 // ─── DATA ─────────────────────────────────────────────────────────────────────
 async function loadAll() {
-  await Promise.all([loadStats(), loadOrders(), loadQuotes()]);
+  await Promise.all([loadStats(), loadOrders()]);
 }
 
 async function loadStats() {
@@ -405,8 +388,6 @@ async function loadStats() {
     document.getElementById('s-orders').textContent = d.total_orders;
     document.getElementById('s-porders').textContent = d.pending_orders;
     document.getElementById('s-month').textContent = d.orders_month;
-    document.getElementById('s-quotes').textContent = d.total_quotes;
-    document.getElementById('s-pquotes').textContent = d.pending_quotes;
   } catch {}
 }
 
@@ -415,14 +396,6 @@ async function loadOrders() {
     const res = await apiFetch('/api/admin/orders');
     ordersData = await res.json();
     renderOrders(ordersData);
-  } catch {}
-}
-
-async function loadQuotes() {
-  try {
-    const res = await apiFetch('/api/admin/bookings');
-    quotesData = await res.json();
-    renderQuotes(quotesData);
   } catch {}
 }
 
@@ -463,33 +436,14 @@ function renderOrders(data) {
   }).join('');
 }
 
-function renderQuotes(data) {
-  const tbody = document.getElementById('quotes-body');
-  if (!data.length) { tbody.innerHTML = `<tr><td colspan="8" class="no-data">No quote requests yet.</td></tr>`; return; }
-  tbody.innerHTML = data.map(q => `
-    <tr data-search="${[q.first_name,q.last_name,q.email,q.phone,q.vehicle_interest||'',q.details||''].join(' ').toLowerCase()}">
-      <td>${fmtDate(q.created_at)}</td>
-      <td>${q.first_name} ${q.last_name}</td>
-      <td>${q.phone}</td>
-      <td>${q.email}</td>
-      <td>${q.vehicle_interest || '—'}</td>
-      <td style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${q.details||''}">${q.details || '—'}</td>
-      <td>${badgeHtml(q.status)}</td>
-      <td>
-        <button class="btn-view" onclick="openDetail('quote',${q.id})">View</button>
-        <button class="btn-del" onclick="deleteRecord('quote',${q.id})">Delete</button>
-      </td>
-    </tr>`).join('');
-}
-
 // ─── DETAIL MODAL ─────────────────────────────────────────────────────────────
 function openDetail(type, id) {
   detailType = type;
   detailId = id;
-  const data = type === 'order' ? ordersData.find(o => o.id === id) : quotesData.find(q => q.id === id);
+  const data = ordersData.find(o => o.id === id);
   if (!data) return;
 
-  document.getElementById('dmodal-title').textContent = type === 'order' ? `Order #${id}` : `Quote #${id}`;
+  document.getElementById('dmodal-title').textContent = `Order #${id}`;
   document.getElementById('detail-status').value = data.status || 'pending';
   document.getElementById('detail-notes').value = data.notes || '';
 
@@ -514,11 +468,6 @@ function openDetail(type, id) {
         </table>
       </div></div>
       <div class="dmodal-row"><div class="dmodal-label">Total</div><div class="dmodal-val"><strong>$${data.total.toLocaleString()}</strong></div></div>`;
-  } else {
-    bodyHtml += `
-      <div class="dmodal-row"><div class="dmodal-label">Service</div><div class="dmodal-val">${data.service || '—'}</div></div>
-      <div class="dmodal-row"><div class="dmodal-label">Vehicle Interest</div><div class="dmodal-val">${data.vehicle_interest || '—'}</div></div>
-      <div class="dmodal-row"><div class="dmodal-label">Details</div><div class="dmodal-val">${data.details || '—'}</div></div>`;
   }
   bodyHtml += `<div class="dmodal-row"><div class="dmodal-label">Date</div><div class="dmodal-val">${fmtDate(data.created_at)}</div></div>`;
 
@@ -537,7 +486,7 @@ async function saveDetail() {
   if (!detailId || !detailType) return;
   const status = document.getElementById('detail-status').value;
   const notes = document.getElementById('detail-notes').value;
-  const url = detailType === 'order' ? `/api/admin/orders/${detailId}` : `/api/admin/bookings/${detailId}`;
+  const url = `/api/admin/orders/${detailId}`;
   try {
     const res = await apiFetch(url, {method:'PATCH', body: JSON.stringify({status, notes})});
     if (!res.ok) throw new Error();
@@ -550,7 +499,7 @@ async function saveDetail() {
 
 async function deleteRecord(type, id) {
   if (!confirm(`Delete this ${type}? This cannot be undone.`)) return;
-  const url = type === 'order' ? `/api/admin/orders/${id}` : `/api/admin/bookings/${id}`;
+  const url = `/api/admin/orders/${id}`;
   try {
     const res = await apiFetch(url, {method:'DELETE'});
     if (res.status !== 204 && !res.ok) throw new Error();
@@ -566,7 +515,6 @@ function switchTab(tab, el) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   el.classList.add('active');
   document.getElementById('panel-orders').style.display = tab === 'orders' ? 'block' : 'none';
-  document.getElementById('panel-quotes').style.display = tab === 'quotes' ? 'block' : 'none';
 }
 
 function filterTable(tableId, query) {
@@ -581,10 +529,10 @@ function filterTable(tableId, query) {
 function startCountdown() {
   clearInterval(countdownInterval);
   countdown = 60;
-  ['cd-orders','cd-quotes'].forEach(id => document.getElementById(id).textContent = countdown);
+  ['cd-orders'].forEach(id => document.getElementById(id).textContent = countdown);
   countdownInterval = setInterval(() => {
     countdown--;
-    ['cd-orders','cd-quotes'].forEach(id => document.getElementById(id).textContent = countdown);
+    ['cd-orders'].forEach(id => document.getElementById(id).textContent = countdown);
     if (countdown <= 0) {
       countdown = 60;
       loadAll();

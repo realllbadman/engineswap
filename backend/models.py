@@ -4,22 +4,6 @@ from sqlalchemy import Column, Integer, Text, Float, DateTime
 from backend.database import Base
 
 
-class Booking(Base):
-    __tablename__ = "bookings"
-
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    first_name = Column(Text, nullable=False)
-    last_name = Column(Text, nullable=False)
-    phone = Column(Text, nullable=False)
-    email = Column(Text, nullable=False)
-    service = Column(Text)
-    vehicle_interest = Column(Text, nullable=True)
-    details = Column(Text, nullable=True)
-    status = Column(Text, default="pending")
-    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
-    notes = Column(Text, nullable=True)
-
-
 class Order(Base):
     __tablename__ = "orders"
 

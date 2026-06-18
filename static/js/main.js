@@ -149,68 +149,6 @@ function updateBadges(cart) {
 }
 
 /* ══════════════════════════════════════════════════════
-   QUOTE MODAL
-   ══════════════════════════════════════════════════════ */
-function openQuoteModal(productName) {
-  const modal   = document.getElementById('quote-modal');
-  const form    = document.getElementById('quote-form');
-  const success = document.getElementById('quote-success-msg');
-  if (form)    { form.reset(); form.style.display = 'block'; }
-  if (success) { success.style.display = 'none'; }
-  if (modal)   { modal.classList.add('show'); document.body.style.overflow = 'hidden'; }
-  if (productName && form) {
-    const interest = form.querySelector('[name="vehicle_interest"]');
-    if (interest) interest.value = productName;
-  }
-}
-
-function closeQuoteModal() {
-  const modal = document.getElementById('quote-modal');
-  if (modal) modal.classList.remove('show');
-  document.body.style.overflow = '';
-}
-
-async function submitQuote(e) {
-  e.preventDefault();
-  const form = e.target;
-  const fd   = new FormData(form);
-  const data = Object.fromEntries(fd.entries());
-
-  const payload = {
-    first_name:       data.first_name,
-    last_name:        data.last_name,
-    phone:            data.phone,
-    email:            data.email,
-    service:          'Quote Request',
-    vehicle_interest: data.vehicle_interest || null,
-    details: ('Qty: ' + data.quantity + '. Timeline: ' + data.timeline + '. ' + (data.details || '')).trim(),
-  };
-
-  const btn = form.querySelector('.btn-submit-order');
-  if (btn) { btn.disabled = true; btn.textContent = 'Sending...'; }
-
-  try {
-    const res = await fetch('/api/bookings/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-    });
-    if (!res.ok) throw new Error(await res.text());
-    form.style.display = 'none';
-    const success = document.getElementById('quote-success-msg');
-    if (success) success.style.display = 'block';
-  } catch (err) {
-    alert('Error submitting quote: ' + err.message);
-    if (btn) { btn.disabled = false; btn.textContent = 'Submit Quote Request'; }
-  }
-}
-
-/* Click backdrop to close quote modal */
-function handleModalClick(e, modalId) {
-  if (e.target.id === modalId && modalId === 'quote-modal') closeQuoteModal();
-}
-
-/* ══════════════════════════════════════════════════════
    TOAST
    ══════════════════════════════════════════════════════ */
 function showToast(msg) {
