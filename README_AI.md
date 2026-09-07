@@ -6,7 +6,7 @@
 ## 1. PROJECT OVERVIEW
 
 - **Business:** AutoPrime
-- **Purpose:** Car and engine sales website. Customers browse vehicles, add to cart, place orders, or request quotes. Owner receives email for every order/quote.
+- **Purpose:** Engine and transmission sales website. Customers browse crate engines, pullouts, LS swap packages and transmissions, add to cart and place orders. Owner receives email for every order.
 - **Stack:** FastAPI (Python) + Plain HTML/CSS/Vanilla JS (no React/Vue)
 - **Owner Email:** Configured in `.env` as `OWNER_EMAIL`
 - **Admin URL:** `/admin`
@@ -128,8 +128,8 @@ All wrapped in try/except — email failure never crashes submission.
 - Pydantic v2 schemas
 - Email service (aiosmtplib, STARTTLS, 4 HTML email functions)
 - Admin HTTP Basic Auth
-- frontend/index.html — complete store (nav, hero, filters, grid, cart, order form, quote modal, toasts)
-- frontend/products.js — 33 products across sedan/suv/truck/sports/engine
+- templates/ — storefront pages (base, index, products, product_detail, checkout)
+- backend/seed_data.py — 33 products across engine/transmission
 - frontend/admin.html — full dashboard with login, stats, tabs, detail modal, auto-refresh
 - frontend/about.html — about page
 

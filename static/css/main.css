@@ -210,12 +210,18 @@ button { cursor: pointer; font-family: inherit; border: none; outline: none; }
 }
 .hero-stat-badge {
   position: absolute; bottom: -18px; left: -18px;
+  display: inline-block; text-decoration: none;
   background: var(--orange); color: var(--white);
-  padding: 16px 22px; border-radius: 8px;
+  padding: 16px 26px; border-radius: 8px;
+  font-size: 16px; font-weight: 800; letter-spacing: 1.5px; line-height: 1;
   box-shadow: 0 6px 20px rgba(232,119,34,.45);
+  transition: transform .18s, box-shadow .18s, background .18s;
 }
-.hero-stat-num { font-size: 28px; font-weight: 800; line-height: 1; }
-.hero-stat-lbl { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; margin-top: 4px; opacity: .9; }
+.hero-stat-badge:hover {
+  background: #d1660f; color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(232,119,34,.55);
+}
 
 /* Info boxes below hero */
 .hero-info-boxes { display: flex; gap: 16px; margin-top: 48px; flex-wrap: wrap; }

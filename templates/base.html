@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block title %}EngineSwap Autos — Quality Engines & Classic Cars{% endblock %}</title>
+  <title>{% block title %}EngineSwap Autos — Quality Crate Engines & Swap Packages{% endblock %}</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='6' fill='%231a2c4e'/><text x='32' y='46' text-anchor='middle' font-size='28' font-family='Georgia' font-weight='bold' fill='%23e87722'>ESA</text></svg>">
   <link rel="stylesheet" href="/static/css/main.css">
   {% block extra_head %}{% endblock %}
@@ -32,12 +32,12 @@
       <div class="logo-text">
         <span class="logo-engine">ENGINE</span><span class="logo-swap">SWAP</span>&nbsp;<span class="logo-autos">AUTOS</span>
       </div>
-      <div class="logo-sub">Engines &middot; Classic Cars &middot; Performance</div>
+      <div class="logo-sub">Crate Engines &middot; Swap Packages &middot; Performance</div>
     </a>
 
     <form class="nav-search-form" id="nav-search-form" action="/products" method="get">
       <input type="text" name="q" id="nav-search-input" class="nav-search-input"
-             placeholder="Search engines, classic cars, parts&hellip;"
+             placeholder="Search engines, swap packages, transmissions&hellip;"
              value="{{ request.query_params.get('q', '') }}">
       <button type="submit" class="nav-search-btn">SEARCH</button>
     </form>
@@ -61,10 +61,7 @@
     <a href="/">Home</a>
     <a href="/products">All Products</a>
     <a href="/products?category=engine">Engines</a>
-    <a href="/products?category=sedan">Classic Cars</a>
-    <a href="/products?category=sports">Sports / Muscle</a>
     <a href="/products?category=transmission">Transmissions</a>
-    <a href="/products?category=truck">Trucks</a>
     <a href="/about">About Us</a>
     <a href="tel:+12105959453">+1 (210) 595-9453</a>
   </div>
@@ -75,7 +72,7 @@
   <div class="trust-inner">
     <span class="trust-item">Free Shipping $5,000+</span>
     <span class="trust-item">1-Year Unlimited Warranty</span>
-    <span class="trust-item">500+ Engines &amp; Vehicles</span>
+    <span class="trust-item">500+ Engines In Stock</span>
     <span class="trust-item">Expert Support 24/7</span>
     <span class="trust-item">Worldwide Shipping</span>
   </div>
@@ -85,11 +82,7 @@
 <nav class="cat-nav">
   <div class="cat-nav-inner">
     <a href="/products"                 class="cat-nav-link">ALL PRODUCTS</a>
-    <a href="/products?category=engine" class="cat-nav-link">ENGINES</a>
-    <a href="/products?category=sedan"  class="cat-nav-link">CLASSIC CARS</a>
-    <a href="/products?category=suv"    class="cat-nav-link">SUV / TRUCK</a>
-    <a href="/products?category=truck"  class="cat-nav-link">TRUCKS</a>
-    <a href="/products?category=sports"       class="cat-nav-link">SPORTS / MUSCLE</a>
+    <a href="/products?category=engine"       class="cat-nav-link">ENGINES</a>
     <a href="/products?category=transmission" class="cat-nav-link">TRANSMISSIONS</a>
     <a href="/about"                          class="cat-nav-link">ABOUT US</a>
   </div>
@@ -105,7 +98,7 @@
       <span class="footer-logo">
         <span style="color:#fff">ENGINESWAP</span>&nbsp;<span style="color:#e87722">AUTOS</span>
       </span>
-      <p class="footer-tagline">Your trusted source for quality remanufactured engines, classic muscle cars, and performance vehicles. Based in San Antonio, Texas.</p>
+      <p class="footer-tagline">Your trusted source for quality crate engines, LS swap packages, and performance transmissions. Based in San Antonio, Texas.</p>
       <div class="footer-contact">
         <div>Tel: <a href="tel:+12105959453" style="color:rgba(255,255,255,.7)">+1 (210) 595-9453</a></div>
         <div>Email: Engineswapsupplies@gmail.com</div>
@@ -114,12 +107,9 @@
     </div>
     <div class="footer-col">
       <h4>Products</h4>
-      <a href="/products?category=engine">Engines</a>
-      <a href="/products?category=sedan">Classic Cars</a>
-      <a href="/products?category=suv">SUV / Truck</a>
-      <a href="/products?category=truck">Trucks</a>
-      <a href="/products?category=sports">Sports / Muscle</a>
-    <a href="/products?category=transmission">Transmissions</a>
+      <a href="/products">All Engines</a>
+      <a href="/products?category=engine">Crate &amp; Pullout Engines</a>
+      <a href="/products?category=transmission">Transmissions</a>
     </div>
     <div class="footer-col">
       <h4>Company</h4>

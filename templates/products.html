@@ -17,10 +17,7 @@
 
     <h1 class="page-h1">
       {% if category == 'engine' %}Engines
-      {% elif category == 'sedan' %}Classic Cars
-      {% elif category == 'suv' %}SUV &amp; Trucks
-      {% elif category == 'truck' %}Trucks
-      {% elif category == 'sports' %}Sports &amp; Muscle Cars
+      {% elif category == 'transmission' %}Transmissions
       {% else %}All Products{% endif %}
     </h1>
     <p class="result-info" id="result-count" style="display:none"></p>
@@ -30,11 +27,8 @@
              placeholder="Search by name or brand&hellip;" value="{{ q }}">
       <select id="filter-category" class="filter-select">
         <option value="">All Categories</option>
-        <option value="engine" {% if category == 'engine' %}selected{% endif %}>Engines</option>
-        <option value="sedan"  {% if category == 'sedan'  %}selected{% endif %}>Classic Cars</option>
-        <option value="suv"    {% if category == 'suv'    %}selected{% endif %}>SUV</option>
-        <option value="truck"  {% if category == 'truck'  %}selected{% endif %}>Trucks</option>
-        <option value="sports" {% if category == 'sports' %}selected{% endif %}>Sports / Muscle</option>
+        <option value="engine"       {% if category == 'engine'       %}selected{% endif %}>Engines</option>
+        <option value="transmission" {% if category == 'transmission' %}selected{% endif %}>Transmissions</option>
       </select>
     </div>
 

@@ -36,7 +36,7 @@ class Product(Base):
     slug         = Column(Text, unique=True, nullable=False)
     name         = Column(Text, nullable=False)
     brand        = Column(Text, nullable=False)
-    category     = Column(Text, nullable=False)   # sedan | suv | truck | sports | engine
+    category     = Column(Text, nullable=False)   # engine | transmission
     year         = Column(Integer, nullable=True)
     fuel         = Column(Text, nullable=True)
     transmission = Column(Text, nullable=True)

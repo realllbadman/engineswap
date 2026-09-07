@@ -99,24 +99,27 @@ app.include_router(admin.router,    prefix="/api/admin",    tags=["admin"])
 def index(request: Request):
     db = SessionLocal()
     try:
-        # Featured: 4 classic cars + the 4 main engines in order
-        _car_cats   = ("sedan", "suv", "truck", "sports")
-        cars_feat   = (db.query(Product)
-                       .filter(Product.in_stock == 1, Product.category.in_(_car_cats))
-                       .limit(4).all())
-        # Pull one flagship crate engine for each of the 4 main families
+        # Featured: one flagship crate engine per main family, topped up to 8
         _main_slugs = [
             "lt4-62-supercharged-crate-650hp",
             "gm-ls3-62-crate",
             "ford-coyote-50-crate",
             "gm-lq9-60-package",
         ]
-        eng_feat = []
+        featured = []
         for slug in _main_slugs:
             e = db.query(Product).filter(Product.slug == slug, Product.in_stock == 1).first()
             if e:
-                eng_feat.append(e)
-        featured    = [p for pair in zip(cars_feat, eng_feat) for p in pair]
+                featured.append(e)
+        # Fill the remaining slots with other in-stock engines
+        seen = {p.slug for p in featured}
+        fill = (db.query(Product)
+                .filter(Product.in_stock == 1,
+                        Product.category == "engine",
+                        Product.slug.notin_(seen))
+                .order_by(Product.price.desc())
+                .limit(8 - len(featured)).all())
+        featured += fill
         brand_rows = (
             db.query(Product.brand, func.count(Product.id))
             .group_by(Product.brand)
@@ -140,27 +143,12 @@ _MAIN_ENGINE_SLUGS = {
     "gm-lq9-60-package", "gm-lq9-60-budget", "gm-lq9-60-stage2",
 }
 
-def _interleave_products(products):
-    """Return products in cycling order: main engines → cars → other engines → transmissions."""
-    main_eng = [p for p in products if p.category == "engine" and p.slug in _MAIN_ENGINE_SLUGS]
+def _order_products(products):
+    """Lead with the flagship engine families, then the rest, then transmissions."""
+    main_eng  = [p for p in products if p.category == "engine" and p.slug in _MAIN_ENGINE_SLUGS]
     other_eng = [p for p in products if p.category == "engine" and p.slug not in _MAIN_ENGINE_SLUGS]
-    vehicles = [p for p in products if p.category in ("sedan","suv","truck","sports")]
-    trans    = [p for p in products if p.category == "transmission"]
-
-    # Single-category view — no interleaving needed
-    if not any([main_eng, other_eng]) or not any([vehicles, trans]):
-        if not vehicles and not trans:
-            return main_eng + other_eng  # engine-only: main first, rarely asked last
-        return products
-
-    result, ime, iv, ioe, it = [], 0, 0, 0, 0
-    chunk = 3
-    while ime < len(main_eng) or iv < len(vehicles) or ioe < len(other_eng) or it < len(trans):
-        result.extend(main_eng[ime:ime+chunk]);  ime += chunk
-        result.extend(vehicles[iv:iv+chunk]);    iv  += chunk
-        result.extend(other_eng[ioe:ioe+chunk]); ioe += chunk
-        result.extend(trans[it:it+chunk]);       it  += chunk
-    return result
+    trans     = [p for p in products if p.category == "transmission"]
+    return main_eng + other_eng + trans
 
 
 @app.get("/products")
@@ -170,8 +158,8 @@ def products_page(request: Request, q: str = "", category: str = ""):
         query = db.query(Product).order_by(Product.in_stock.desc(), Product.price.asc())
         all_products = query.all()
 
-        # Apply interleave only on the unfiltered view; JS handles live filtering
-        ordered = _interleave_products(all_products)
+        # Order only on the unfiltered view; JS handles live filtering
+        ordered = _order_products(all_products)
 
         total = db.query(Product).count()
         return templates.TemplateResponse(request, "products.html", {

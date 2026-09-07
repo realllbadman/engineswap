@@ -48,11 +48,7 @@
         </div>
         <!-- Shipping info -->
         <div style="background:#f0f4f8;border:1px solid #d0d7de;border-radius:6px;padding:10px 16px;margin-bottom:16px;font-size:12.5px;color:#555">
-          {% if product.category == 'engine' or product.category == 'transmission' %}
-            Shipping: <strong style="color:#1a2c4e">$500 flat rate</strong> &bull; Free on orders $5,000+
-          {% else %}
-            Shipping: <strong style="color:#1a2c4e">$1,000 flat rate</strong> &bull; Free on orders $5,000+
-          {% endif %}
+          Shipping: <strong style="color:#1a2c4e">$500 flat rate</strong> &bull; Free on orders $5,000+
         </div>
         <div class="detail-warranty-bar">
           1-Year Unlimited Mileage Warranty Included
@@ -61,7 +57,9 @@
         <div class="detail-specs">
           <div class="spec-row"><span class="spec-label">Year</span><span class="spec-val">{{ product.year }}</span></div>
           <div class="spec-row"><span class="spec-label">Fuel Type</span><span class="spec-val">{{ product.fuel }}</span></div>
+          {% if product.transmission and product.transmission != 'N/A' %}
           <div class="spec-row"><span class="spec-label">Transmission</span><span class="spec-val">{{ product.transmission }}</span></div>
+          {% endif %}
           <div class="spec-row">
             <span class="spec-label">Mileage</span>
             <span class="spec-val">
