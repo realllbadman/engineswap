@@ -462,7 +462,7 @@ footer { background: var(--navy-dark); color: var(--white); padding: 54px 20px 0
 .spec-label { font-weight: 600; color: var(--text-mid); width: 140px; flex-shrink: 0; }
 .spec-val   { color: var(--text-dark); }
 
-.detail-desc { font-size: 14px; color: var(--text-mid); line-height: 1.8; margin-bottom: 22px; }
+.detail-desc { font-size: 14px; color: var(--text-mid); line-height: 1.8; margin-bottom: 22px; white-space: pre-line; }
 
 .detail-features h4 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .6px; color: var(--navy); margin-bottom: 10px; font-family: 'Segoe UI', sans-serif; }
 .feature-item { font-size: 13.5px; color: var(--text-dark); padding: 5px 0; display: flex; align-items: flex-start; gap: 9px; }
